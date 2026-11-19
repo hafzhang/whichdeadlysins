@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://whichdeadlysins.com/sitemap-index.xml

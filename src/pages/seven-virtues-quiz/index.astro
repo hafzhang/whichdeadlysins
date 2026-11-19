@@ -1,0 +1,211 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Quiz from '../../components/Quiz.tsx';
+import { VIRTUES, VIRTUE_QUESTIONS } from '../../data/virtues';
+import { SITE } from '../../data/site';
+
+const title =
+  'Seven Heavenly Virtues Quiz: Which Virtue Is Your Strongest? (15 Questions)';
+const description =
+  'Take the free seven heavenly virtues test: 15 questions measuring humility, kindness, patience, diligence, charity, temperance, and chastity with instant percentage results.';
+
+const faqs = [
+  {
+    q: 'What are the seven heavenly virtues?',
+    a: 'The seven heavenly, or contrary, virtues are humility, kindness, patience, diligence, charity, temperance, and chastity. Each one is the traditional remedy for a matching deadly sin: humility opposes pride, kindness opposes envy, patience opposes wrath, diligence opposes sloth, charity opposes greed, temperance opposes gluttony, and chastity opposes lust.',
+  },
+  {
+    q: 'How is the virtues quiz different from the deadly sins quiz?',
+    a: 'The two quizzes share the same seven-dimension structure and scoring formula, but they measure from opposite directions. The sins quiz asks how strongly problematic tendencies show up; the virtues quiz asks how strongly the corrective habits are already built. Taking both gives you a fuller picture: where the sin score is high and the matching virtue score is low is exactly where practice pays off most.',
+  },
+  {
+    q: 'How many questions are in the virtues test?',
+    a: 'Fifteen short statements, each answered on a four-point scale from strongly disagree to strongly agree. Humility has three statements and the other six virtues have two each. Most people finish in under five minutes and receive all seven percentage scores immediately.',
+  },
+  {
+    q: 'How are the percentage scores calculated?',
+    a: 'Every answer is worth 0 to 3 points. Your points in a virtue are divided by the maximum points available for that virtue and expressed as a percentage, so dimensions with different numbers of questions stay directly comparable. Your dominant virtue is the dimension with the highest percentage. All math runs locally in your browser.',
+  },
+  {
+    q: 'Is chastity only about sex?',
+    a: 'No. In this framework chastity means integrating desire with your commitments and respect for other people. It applies to how you handle attraction, boundaries, and impulses of every kind, and it does not require any particular relationship status or religious belief.',
+  },
+  {
+    q: 'Do you store my answers?',
+    a: 'No. Like the deadly sins quiz, this test is scored entirely in your browser. Answers are never sent to a server, saved to a database, or attached to an account, and the site uses cookie-free Cloudflare Web Analytics for aggregate traffic only.',
+  },
+  {
+    q: 'Is this a validated psychological assessment?',
+    a: 'No. It is an educational self-reflection tool built on a historical ethical framework, not a clinical instrument, and it does not provide medical or psychological diagnosis. Use it as a structured starting point for honest self-examination.',
+  },
+  {
+    q: 'Is the virtues quiz free?',
+    a: 'Yes. It is completely free, requires no account or email, and shows every result immediately with no paywall or locked content.',
+  },
+];
+
+const webAppLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'Seven Heavenly Virtues Quiz',
+  url: new URL('/seven-virtues-quiz/', SITE.url).href,
+  applicationCategory: 'EntertainmentApplication',
+  operatingSystem: 'Any',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  description,
+};
+
+const quizLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Quiz',
+  name: 'Seven Heavenly Virtues Quiz',
+  about: 'The seven heavenly virtues: humility, kindness, patience, diligence, charity, temperance, and chastity',
+  educationalLevel: 'Beginner',
+  inLanguage: 'en',
+  question: VIRTUE_QUESTIONS.map((item) => ({
+    '@type': 'Question',
+    name: item.text,
+  })),
+};
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.q,
+    acceptedAnswer: { '@type': 'Answer', text: faq.a },
+  })),
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  path="/seven-virtues-quiz/"
+  ogImage="/og/virtues.png"
+  jsonLd={[webAppLd, quizLd, faqLd]}
+>
+  <Breadcrumbs
+    items={[
+      { name: 'Home', path: '/' },
+      { name: 'Seven Heavenly Virtues Quiz', path: '/seven-virtues-quiz/' },
+    ]}
+  />
+
+  <section class="max-w-3xl mt-4">
+    <h1 class="text-4xl md:text-5xl">Seven Heavenly Virtues Quiz</h1>
+    <p class="text-lg md:text-xl text-[var(--color-muted)] mt-4">
+      Which virtue is already your strongest? Fifteen honest questions, seven percentage scores,
+      instant results &mdash; and nothing stored.
+    </p>
+
+    <div class="mt-6 space-y-4 text-lg">
+      <p>
+        For every deadly sin the medieval moral tradition named a contrary virtue: a trained habit
+        that pulls character in the opposite direction. Where pride inflates the self, humility
+        measures it honestly; where envy resents another&rsquo;s gain, kindness celebrates it;
+        where wrath explodes, patience holds the gap between trigger and response. This quiz
+        measures how strongly those seven corrective virtues already operate in your daily
+        decisions.
+      </p>
+      <p>
+        You will answer fifteen statements on a scale from <strong>strongly disagree</strong> to
+        <strong>strongly agree</strong>. Unlike the sins quiz, every statement here is positively
+        worded: agreement means the virtue is strong. Answer according to what you actually do,
+        not what you wish you did, since virtue lives in repeated behavior rather than good
+        intentions.
+      </p>
+      <p>
+        Your result shows a percentage for each of the seven virtues and a short reading of your
+        dominant one, including the sin it exists to counter. For the most useful session, take
+        this test together with the{' '}
+        <a href="/">seven deadly sins test on the homepage</a> and compare the matched pairs.
+      </p>
+    </div>
+  </section>
+
+  <div class="mt-10 max-w-3xl">
+    <Quiz
+      client:visible
+      questions={VIRTUE_QUESTIONS}
+      dimensions={VIRTUES}
+      resultNoun="virtue"
+      quizLabel="Seven heavenly virtues quiz"
+      shareTitle="Seven Heavenly Virtues Quiz"
+      shareNoun="heavenly virtue"
+      sharePath="/seven-virtues-quiz/"
+    />
+    <noscript>
+      <p class="mt-4 p-4 rounded-xl border border-[var(--color-line)] bg-white text-sm">
+        The interactive quiz requires JavaScript, which is currently disabled. The article and FAQ
+        below remain available without JavaScript.
+      </p>
+    </noscript>
+  </div>
+
+  <article class="prose-article mt-14">
+    <h2>What Is the Seven Heavenly Virtues Test?</h2>
+    <p>
+      The seven heavenly virtues test measures the strength of seven habits that were historically
+      prescribed as remedies for the seven deadly sins. The pairing is deliberate and precise:
+      humility against pride, kindness against envy, patience against wrath, diligence against
+      sloth, charity against greed, temperance against gluttony, and chastity against lust. Rather
+      than asking what tempts you, this quiz asks what you have actually practiced &mdash; because
+      the medieval tradition treated virtue as a skill built by repetition, a view that overlaps
+      closely with modern research on habit formation. The complete side-by-side reasoning lives on
+      the <a href="/seven-deadly-sins-and-virtues/">seven deadly sins and virtues</a> page.
+    </p>
+
+    <h2>The Seven Virtues at a Glance</h2>
+    {
+      VIRTUES.map((virtue) => (
+        <p>
+          <strong>
+            <a href={virtue.href}>{virtue.name}</a> ({virtue.latin})
+          </strong>
+          &nbsp;&mdash; {virtue.summary}
+        </p>
+      ))
+    }
+
+    <h2>How the Scoring Works</h2>
+    <p>
+      The quiz contains fifteen questions: humility has three, and the other six virtues have two
+      each. Answers carry zero to three points, and each dimension is normalized against its own
+      maximum, producing a percentage from 0% to 100%. A high score means the virtue is a settled
+      part of your routine; a low score identifies a promising training target rather than a
+      verdict on your character. As with the sins quiz, all calculations happen on your device and
+      no answers leave the browser.
+    </p>
+
+    <h2>How to Use Your Results Alongside the Sins Quiz</h2>
+    <p>
+      The two quizzes are designed to be read as a pair. Look at each sin and its matching virtue
+      together: a high wrath score combined with a low patience score pinpoints the exact muscle
+      to train, while a high charity score alongside a low greed score confirms that generosity is
+      already doing its work. Retake both quizzes after a few weeks of deliberately practicing one
+      contrary virtue &mdash; the percentage movement is the feedback loop that turns an ancient
+      framework into a practical self-improvement instrument.
+    </p>
+
+    <h2>Frequently Asked Questions</h2>
+    {
+      faqs.map((faq) => (
+        <section>
+          <h3>{faq.q}</h3>
+          <p>{faq.a}</p>
+        </section>
+      ))
+    }
+
+    <h2>Continue Exploring</h2>
+    <p>
+      Take the <a href="/">seven deadly sins test</a> to measure the flip side of these seven
+      dimensions, study every matched pair in the{' '}
+      <a href="/seven-deadly-sins-and-virtues/">sins and virtues guide</a>, or read the full
+      history in the <a href="/seven-deadly-sins/">seven deadly sins overview</a>.
+    </p>
+  </article>
+</BaseLayout>

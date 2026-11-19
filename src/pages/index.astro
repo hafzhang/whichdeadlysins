@@ -1,0 +1,212 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Quiz from '../components/Quiz.tsx';
+import { QUESTIONS } from '../data/quiz';
+import sins from '../data/sins.json';
+import { SITE } from '../data/site';
+
+const title =
+  'Which Deadly Sin Are You? Free Seven Deadly Sins Test (15 Questions)';
+const description =
+  'Take this free seven deadly sins test: 15 quick questions, instant percentage results across pride, envy, wrath, sloth, greed, gluttony, and lust. No sign-up.';
+
+const sinDimensions = sins.map((sin) => ({
+  ...sin,
+  href: `/seven-deadly-sins/#${sin.slug}`,
+}));
+
+const faqs = [
+  {
+    q: 'Is the seven deadly sins test accurate?',
+    a: 'It is accurate as a structured self-reflection tool: each dimension is scored from your own answers using a transparent, normalized formula. It is not a validated clinical instrument and should not be treated as a psychological diagnosis. People who know you well may notice patterns you do not see yourself, which is why discussing results can be more revealing than the score alone.',
+  },
+  {
+    q: 'What are the seven deadly sins?',
+    a: 'The seven deadly sins are pride, envy, wrath, sloth, greed (avarice), gluttony, and lust. They began as a list of eight troublesome thoughts among early Christian monks, were consolidated into seven by Pope Gregory I in the sixth century, and later became a lasting framework for understanding character flaws in Western culture.',
+  },
+  {
+    q: 'How many questions are in this quiz?',
+    a: 'The quiz contains 15 short statements. You answer each one on a four-point scale from strongly disagree to strongly agree. Most people finish in under five minutes, and your results appear instantly on the same page.',
+  },
+  {
+    q: 'How are the percentage scores calculated?',
+    a: 'Every question belongs to one of the seven dimensions. Each answer is worth 0 to 3 points, and your score for a dimension is divided by the maximum points available for that dimension, then converted to a percentage. Normalizing by the available maximum keeps the comparison fair even though one dimension has three questions and the others have two.',
+  },
+  {
+    q: 'Which of the seven deadly sins is considered the worst?',
+    a: 'In the traditional hierarchy, pride (superbia) is treated as the root sin because excessive self-regard can feed the other six: the envious person wants what pride says they deserve, and the wrathful person punishes whoever wounds their pride. Dante placed the proud on the lowest terrace of Purgatory, furthest along the path of correction. Modern ethicists instead judge sins by the harm they actually cause to yourself and others.',
+  },
+  {
+    q: 'Can my results change over time?',
+    a: 'Yes, and they should. The quiz measures current habits and attitudes rather than fixed traits. Retaking it after a few months, especially after deliberately practicing the opposing virtue such as patience or generosity, often produces a noticeably different profile.',
+  },
+  {
+    q: 'Is this quiz based on real psychology?',
+    a: 'It is built on a historical moral framework rather than a clinical model such as the Big Five personality inventory. The questions target recurring behavioral patterns described by centuries of ethical writing, and the scoring is deliberately simple so you can inspect exactly how every result was produced.',
+  },
+  {
+    q: 'Do you store my answers?',
+    a: 'No. All scoring runs in your browser. Your answers are never sent to a server, written to a database, or attached to an account, and the site uses cookie-free Cloudflare Web Analytics for aggregate traffic counts only. Read the privacy policy for full details.',
+  },
+  {
+    q: 'Which virtue opposes each deadly sin?',
+    a: 'The seven contrary virtues are humility against pride, kindness against envy, patience against wrath, diligence against sloth, charity against greed, temperance against gluttony, and chastity against lust. The full side-by-side comparison is on the seven deadly sins and virtues page.',
+  },
+  {
+    q: 'Is the quiz free, and do I need an account?',
+    a: 'The quiz is completely free, requires no account and no email address, and shows all seven percentage scores immediately after the final question. There is no paywall and no results are locked behind registration.',
+  },
+];
+
+const webAppLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: SITE.name,
+  url: SITE.url + '/',
+  applicationCategory: 'EntertainmentApplication',
+  operatingSystem: 'Any',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  description,
+};
+
+const quizLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Quiz',
+  name: 'Which Deadly Sin Are You?',
+  about: 'The seven deadly sins: pride, envy, wrath, sloth, greed, gluttony, and lust',
+  educationalLevel: 'Beginner',
+  inLanguage: 'en',
+  question: QUESTIONS.map((item) => ({
+    '@type': 'Question',
+    name: item.text,
+  })),
+};
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.q,
+    acceptedAnswer: { '@type': 'Answer', text: faq.a },
+  })),
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  path="/"
+  ogImage="/og/default.png"
+  jsonLd={[webAppLd, quizLd, faqLd]}
+>
+  <section class="max-w-3xl">
+    <h1 class="text-4xl md:text-5xl">Which Deadly Sin Are You?</h1>
+    <p class="text-lg md:text-xl text-[var(--color-muted)] mt-4">
+      A free, fast seven deadly sins test with instant percentage results across all seven
+      dimensions &mdash; no account, no email, nothing stored.
+    </p>
+
+    <div class="mt-6 space-y-4 text-lg">
+      <p>
+        For fifteen hundred years the seven deadly sins served as a compact map of the ways good
+        people quietly undermine themselves: pride that refuses correction, envy that resents
+        another&rsquo;s joy, wrath that cannot cool, sloth that avoids what matters, greed that
+        never reaches enough, gluttony that consumes past satisfaction, and lust that outruns
+        judgment. This quiz turns that ancient framework into fifteen honest questions about your
+        current habits.
+      </p>
+      <p>
+        You will answer each statement on a scale from <strong>strongly disagree</strong> to
+        <strong>strongly agree</strong>. There are no trick questions and no morally &ldquo;good&rdquo;
+        answer to hunt for; the most useful result comes from answering as you actually behave, not
+        as you wish you did. Every calculation happens locally in your browser.
+      </p>
+      <p>
+        When you finish, you receive a percentage for each of the seven dimensions and a short
+        reading of your dominant sin, including the contrary virtue traditionally used to keep it
+        in check. Allow about five minutes, and remember: this is a reflection tool for
+        entertainment and personal insight, not a clinical assessment.
+      </p>
+    </div>
+  </section>
+
+  <div class="mt-10 max-w-3xl">
+    <Quiz
+      client:visible
+      questions={QUESTIONS}
+      dimensions={sinDimensions}
+      resultNoun="sin"
+      quizLabel="Seven deadly sins quiz"
+      shareTitle="Which Deadly Sin Are You?"
+      shareNoun="deadly sin"
+      sharePath="/"
+    />
+    <noscript>
+      <p class="mt-4 p-4 rounded-xl border border-[var(--color-line)] bg-white text-sm">
+        The interactive quiz requires JavaScript, which is currently disabled. The full article,
+        seven-sin guide, and FAQ below remain available without JavaScript.
+      </p>
+    </noscript>
+  </div>
+
+  <article class="prose-article mt-14">
+    <h2>What Is the Seven Deadly Sins Test?</h2>
+    <p>
+      The seven deadly sins test measures how strongly seven classic patterns of character show up
+      in your everyday decisions. Rather than stamping you with a single label, it returns a
+      seven-dimension profile so you can see which tendencies are loudest and which are quiet. The
+      framework originates in the desert monasticism of fourth-century Egypt, passed through
+      medieval theology and literature such as Dante&rsquo;s <em>Inferno</em>, and survives today
+      because the patterns it names &mdash; defensiveness, comparison, procrastination, overconsumption
+      &mdash; remain instantly recognizable. A longer treatment of each concept lives in the
+      <a href="/seven-deadly-sins/">seven deadly sins guide</a>, including origins, modern
+      examples, and common misconceptions.
+    </p>
+
+    <h2>The Seven Deadly Sins at a Glance</h2>
+    {
+      sins.map((sin) => (
+        <p>
+          <strong>
+            <a href={`/seven-deadly-sins/#${sin.slug}`}>{sin.name}</a> ({sin.latin})
+          </strong>
+          &nbsp;&mdash; {sin.summary}
+        </p>
+      ))
+    }
+
+    <h2>How the Scoring Works</h2>
+    <p>
+      The quiz contains fifteen questions: pride has three, and the other six dimensions have two
+      each. Every answer carries a fixed weight from zero to three points. Because the dimensions
+      contain different numbers of questions, raw totals are normalized: your points in a dimension
+      are divided by the maximum points available there and expressed as a percentage. A dimension
+      where you strongly agree with every statement reaches 100%, while one where you strongly
+      disagree with everything lands at 0%. Your dominant sin is simply the dimension with the
+      highest percentage, with ties broken in the traditional ordering that begins with pride. All
+      math runs on your device; nothing about your answers leaves the browser, which is also why
+      the site needs no account system or database.
+    </p>
+
+    <h2>Frequently Asked Questions</h2>
+    {
+      faqs.map((faq) => (
+        <section>
+          <h3>{faq.q}</h3>
+          <p>{faq.a}</p>
+        </section>
+      ))
+    }
+
+    <h2>Ready to Begin?</h2>
+    <p>
+      Scroll back to the quiz above and work through the fifteen statements honestly. When your
+      profile appears, follow the link inside your dominant-sin result to read its full section in
+      the <a href="/seven-deadly-sins/">seven deadly sins guide</a>, or compare every sin with its
+      remedy on the <a href="/seven-deadly-sins-and-virtues/">sins and virtues</a> page. When you
+      finish, take the matching <a href="/seven-virtues-quiz/">seven heavenly virtues quiz</a> to
+      measure the corrective side of the same seven dimensions.
+    </p>
+  </article>
+</BaseLayout>

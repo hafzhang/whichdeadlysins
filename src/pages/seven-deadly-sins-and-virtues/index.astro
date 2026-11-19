@@ -1,0 +1,132 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import sins from '../../data/sins.json';
+import { SITE } from '../../data/site';
+
+const title = 'Seven Deadly Sins and Virtues: The Seven Contrary Virtues Explained';
+const description =
+  'Which virtue opposes each deadly sin? A complete seven-by-seven table pairing pride with humility, envy with kindness, wrath with patience, and the rest, with explanations.';
+
+const pairNotes: Record<string, string> = {
+  pride:
+    'Humility is not self-contempt; it is an honest accounting of your actual limits and debts. Where pride demands credit and rank, humility lets you share wins, admit mistakes quickly, and ask for help without feeling diminished. Practically, it sounds like saying "I was wrong" out loud and naming the people whose work made yours possible.',
+  envy:
+    'Kindness here means actively willing good for the person whose advantages sting. The training is concrete: congratulate the rival who got the promotion, say the generous thing about the friend\u2019s good news in the moment you least want to. Repeated often enough, admiration replaces resentment because the same person can no longer be both a threat and a beneficiary of your goodwill.',
+  wrath:
+    'Patience is the capacity to hold the space between a trigger and a response. It does not require denying anger or accepting injustice; it means refusing to act while the anger is steering. Slow breathing, a mandatory delay before sending heated messages, and choosing consequences calmly instead of lashing out are the ordinary drills of this virtue.',
+  sloth:
+    'Diligence applies steady, modest effort before motivation shows up. The classic technique is committing to the smallest possible start &mdash; ten minutes, one paragraph, a single email &mdash; because acedia thrives on the overwhelming whole task and starves on tiny beginnings. Rest remains scheduled and deliberate; diligence is the opposite of avoidance, not the opposite of rest.',
+  greed:
+    'Charity in this pairing means deliberate release: giving money, time, credit, or useful information away on purpose and before you feel you can spare it. Because greed is fear of insufficiency wearing the mask of prudence, generosity is its direct counter-evidence. Every act of unforced giving proves that enough exists, loosening the hoarding instinct one repetition at a time.',
+  gluttony:
+    'Temperance is deliberate consumption rather than abstinence. It means deciding in advance how much is enough, noticing the difference between genuine need and comfort-seeking, and stopping while still slightly unsatisfied so that appetite stops setting the boundary. It applies equally to food, alcohol, streaming, and the reflexive reach for the phone in every quiet moment.',
+  lust:
+    'Chastity is the most misunderstood of the seven virtues: it means integrating desire with your commitments and respect for other people, not eliminating attraction. It asks whether a longing is being treated as a command. Honest boundaries, transparency with partners, and a pause before acting on intensity are its everyday practice, whatever your relationship status.',
+};
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  author: { '@type': 'Person', name: SITE.author.name },
+  publisher: { '@type': 'Organization', name: SITE.name, url: SITE.url + '/' },
+  datePublished: '2026-11-19',
+  dateModified: '2026-11-19',
+  mainEntityOfPage: new URL('/seven-deadly-sins-and-virtues/', SITE.url).href,
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  path="/seven-deadly-sins-and-virtues/"
+  type="article"
+  publishedTime="2026-11-19"
+  jsonLd={articleLd}
+>
+  <Breadcrumbs
+    items={[
+      { name: 'Home', path: '/' },
+      { name: 'Sins & Virtues', path: '/seven-deadly-sins-and-virtues/' },
+    ]}
+  />
+
+  <article class="prose-article mt-4">
+    <h1>Seven Deadly Sins and Virtues: Which Virtue Opposes Which Sin?</h1>
+    <p>
+      The medieval moral tradition did not leave the seven deadly sins without remedies. Each sin
+      is matched with a <strong>contrary virtue</strong> &mdash; a trained habit that pulls
+      character in the opposite direction. The pairing is practical rather than poetic: if a sin is
+      a groove worn into behavior by repetition, the contrary virtue is a new groove cut beside it.
+      This page gives you the complete seven-by-seven table in one glance, then walks through every
+      pair in plain language. For the full definition and history of each sin, start with the
+      <a href="/seven-deadly-sins/"> seven deadly sins guide</a>.
+    </p>
+
+    <h2>The Seven Sins and Their Contrary Virtues: Table</h2>
+    <table>
+      <caption class="text-left mb-2 text-[var(--color-muted)]">
+        Table 1: each deadly sin paired with its contrary heavenly virtue.
+      </caption>
+      <thead>
+        <tr>
+          <th scope="col">Deadly sin</th>
+          <th scope="col">Latin name</th>
+          <th scope="col">Contrary virtue</th>
+          <th scope="col">What the virtue looks like in practice</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          sins.map((sin) => (
+            <tr>
+              <th scope="row">{sin.name}</th>
+              <td>{sin.latin}</td>
+              <td>
+                <strong>{sin.virtue}</strong>
+              </td>
+              <td>{pairNotes[sin.slug]}</td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+
+    <h2>Each Pair Explained</h2>
+    {
+      sins.map((sin) => (
+        <section id={sin.slug}>
+          <h3>
+            {sin.name} vs. {sin.virtue}
+          </h3>
+          <p>
+            <strong>The sin:</strong> {sin.summary}
+          </p>
+          <p>
+            <strong>The virtue in practice:</strong> {pairNotes[sin.slug]}
+          </p>
+        </section>
+      ))
+    }
+
+    <h2>How to Use the Pairings</h2>
+    <p>
+      The useful way to read this table is not as a pass-fail judgment but as a training menu.
+      Take the result from the <a href="/">homepage seven deadly sins quiz</a>, identify your
+      dominant dimension, and practice its contrary virtue deliberately for a few weeks &mdash;
+      one specific, repeatable action rather than a vague intention. Because virtues are skills,
+      measurable change usually shows up before it feels real. When you retake the quiz afterward,
+      the percentage profile shifts; that shift is the tradition&rsquo;s own feedback loop,
+      modernized.
+    </p>
+    <p>
+      Return to the <a href="/seven-deadly-sins/">seven deadly sins overview</a> for origins,
+      definitions, modern examples, and misconceptions, or put the framework to work: take the
+      fifteen-question <a href="/">seven deadly sins test</a> to find your dominant sin, then take
+      the matching <a href="/seven-virtues-quiz/">seven heavenly virtues quiz</a> to see which
+      corrective virtue is already your strongest.
+    </p>
+  </article>
+</BaseLayout>

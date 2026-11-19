@@ -1,0 +1,102 @@
+@import 'tailwindcss';
+
+:root {
+  --color-bg: #faf7f2;
+  --color-ink: #1f1b2e;
+  --color-muted: #5c5670;
+  --color-accent: #8e7cc3;
+  --color-gold: #b8860b;
+  --color-line: #e6e0f0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-bg);
+  color: var(--color-ink);
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1.2;
+  font-weight: 700;
+  text-wrap: balance;
+}
+
+a {
+  color: #5b4a9c;
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: #43367a;
+}
+
+.prose-article {
+  max-width: 46rem;
+}
+
+.prose-article h2 {
+  margin-top: 2.4rem;
+  margin-bottom: 0.85rem;
+  font-size: 1.6rem;
+}
+
+.prose-article h3 {
+  margin-top: 1.8rem;
+  margin-bottom: 0.5rem;
+  font-size: 1.22rem;
+}
+
+.prose-article p,
+.prose-article li,
+.prose-article td,
+.prose-article th {
+  color: #2c2740;
+}
+
+.prose-article ul,
+.prose-article ol {
+  padding-left: 1.4rem;
+}
+
+.prose-article table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.97rem;
+}
+
+.prose-article th,
+.prose-article td {
+  border: 1px solid var(--color-line);
+  padding: 0.6rem 0.75rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.prose-article th {
+  background: #f1ecfa;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}

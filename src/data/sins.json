@@ -1,0 +1,86 @@
+[
+  {
+    "slug": "pride",
+    "name": "Pride",
+    "latin": "Superbia",
+    "virtue": "Humility",
+    "color": "#8e7cc3",
+    "tagline": "An inflated belief in your own superiority",
+    "summary": "Pride is an inflated sense of self-worth that makes admiration feel like a necessity and criticism feel like an attack. It is the tendency to rank yourself above others and to protect that ranking at the expense of honesty, gratitude, and growth.",
+    "description": "Your highest-scoring dimension is Pride (Superbia). People with strong pride scores invest heavily in being seen as competent, special, or above average. Confidence itself is not the problem; pride becomes corrosive when your self-image depends on looking down on someone else, admitting fault feels impossible, and asking for help reads as defeat. The traditional remedy is humility: an honest view of your own limits and a willingness to share credit.",
+    "modernExample": "Taking full credit for a team project, dismissing feedback as ignorant, or refusing to apologize because doing so would feel like losing status.",
+    "misconception": "Healthy self-esteem is not pride. The sin refers to self-love so swollen that it crowds out other people's dignity and your own ability to see yourself accurately."
+  },
+  {
+    "slug": "envy",
+    "name": "Envy",
+    "latin": "Invidia",
+    "virtue": "Kindness",
+    "color": "#2e7d32",
+    "tagline": "Resentment of what other people have",
+    "summary": "Envy is the painful awareness that someone else possesses a trait, possession, relationship, or opportunity you want, paired with the wish that they did not have it. Unlike simple admiration, envy comes with resentment and a habit of constant comparison.",
+    "description": "Your highest-scoring dimension is Envy (Invidia). Envy-driven attention keeps returning to what peers, neighbors, or strangers appear to have: the job, the body, the relationship, the numbers on a screen. It differs from admiration, which inspires you, because envy quietly wants the other person's light to dim so yours can look brighter. Its contrary virtue is kindness: learning to celebrate another person's good fortune without subtracting from your own.",
+    "modernExample": "Feeling sour when a colleague gets promoted, scrolling a rival's social media for flaws, or downplaying a friend's good news to protect your own sense of standing.",
+    "misconception": "Wanting what someone else has is normal human motivation. Envy becomes sinful only when the desire curdles into resentment at their happiness."
+  },
+  {
+    "slug": "wrath",
+    "name": "Wrath",
+    "latin": "Ira",
+    "virtue": "Patience",
+    "color": "#c62828",
+    "tagline": "Anger that governs you instead of serving you",
+    "summary": "Wrath is anger that has outgrown its purpose. Anger itself is a natural signal that a boundary has been crossed; wrath is the refusal to let the signal fade, feeding grudges, fantasies of revenge, and outbursts that punish people beyond what the situation warrants.",
+    "description": "Your highest-scoring dimension is Wrath (Ira). A strong wrath score means frustration tends to escalate quickly and linger: minor inconveniences can hijack your mood, and wrongs real or imagined get replayed long after everyone else has moved on. The moral tradition does not demand never feeling angry; it asks whether anger remains a tool you use or a master that uses you. Its opposing virtue is patience, which creates the gap between trigger and response.",
+    "modernExample": "Sending a scorching message in the heat of the moment, holding a grudge for years over a small slight, or lashing out at service workers over trivial errors.",
+    "misconception": "Wrath is not the same as righteous anger at genuine injustice. The tradition condemns uncontrolled, vengeful, or prolonged anger, not the moral energy that drives people to fix what is broken."
+  },
+  {
+    "slug": "sloth",
+    "name": "Sloth",
+    "latin": "Acedia",
+    "virtue": "Diligence",
+    "color": "#7986cb",
+    "tagline": "The avoidance of effort that matters",
+    "summary": "Sloth, originally called acedia, is not mere laziness but a quiet despair: refusing the work your own values demand because it feels too heavy, too boring, or too unlikely to matter. It shows up as chronic procrastination, passive distraction, and withdrawal from responsibility.",
+    "description": "Your highest-scoring dimension is Sloth (Acedia). The old monks who named acedia described a noon-day demon: not sleepiness exactly, but a sour restlessness that makes every duty feel pointless and every diversion feel urgent. A high sloth score suggests obligations get postponed until they become emergencies, and free time disappears into passive scrolling rather than anything you would have chosen in advance. The remedy is diligence: small, steady effort applied before motivation arrives.",
+    "modernExample": "Starting assignments the night before they are due, letting messages and bills pile up for weeks, or choosing endless scrolling over a hobby you claim to care about.",
+    "misconception": "Rest is not sloth. Scheduled recovery is virtuous; acedia is the avoidance of meaningful duty through distraction, often while feeling busy."
+  },
+  {
+    "slug": "greed",
+    "name": "Greed",
+    "latin": "Avaritia",
+    "virtue": "Charity",
+    "color": "#b8860b",
+    "tagline": "Endless acquisition beyond what is enough",
+    "summary": "Greed, or avarice, is the drive to acquire and hoard money, possessions, status, or information long past the point of enough. It treats accumulating as the goal of life rather than a tool for security, generosity, and freedom.",
+    "description": "Your highest-scoring dimension is Greed (Avaritia). A high greed score means the question 'how much is enough?' rarely gets a stable answer: the next purchase, raise, or milestone always promises the safety that the last one failed to deliver. Greed can look respectable because modern culture rewards ambition, but its signature is hoarding what could be shared and measuring people by what they own. Its contrary virtue is charity: deliberately practicing release and generosity.",
+    "modernExample": "Hoarding useful information that cost nothing to share, upgrading possessions while going into debt, or treating every relationship as a networking opportunity.",
+    "misconception": "Saving, investing, and enjoying nice things are not greed. The line is crossed when accumulation becomes an end in itself and generosity feels like loss."
+  },
+  {
+    "slug": "gluttony",
+    "name": "Gluttony",
+    "latin": "Gula",
+    "virtue": "Temperance",
+    "color": "#ef6c00",
+    "tagline": "Consumption that overrides satisfaction",
+    "summary": "Gluttony is consuming food, drink, media, or any pleasure past the point of satisfaction simply because more is available. It is less about quantity than about the automatic, comfort-driven habit of reaching for the next hit instead of asking what the body or mind actually needs.",
+    "description": "Your highest-scoring dimension is Gluttony (Gula). Although traditionally pictured as overeating, gluttony covers any appetite run on autopilot: binge-watching, doom-scrolling, drinking to numb, or eating when bored rather than hungry. A strong score suggests consumption is doing emotional work, soothing stress or filling silence. Its opposing virtue is temperance, not abstinence: the ability to choose deliberately and stop at enough.",
+    "modernExample": "Finishing a whole package while staring at a screen, ordering the largest size out of habit, or opening a third app the moment boredom appears.",
+    "misconception": "Gluttony is not body size and it is not the enjoyment of good food. It is the loss of deliberate choice around any appetite."
+  },
+  {
+    "slug": "lust",
+    "name": "Lust",
+    "latin": "Luxuria",
+    "virtue": "Chastity",
+    "color": "#d81b60",
+    "tagline": "Intense desire that outruns judgment",
+    "summary": "Lust is the surrender of longer-term values to intense, immediate desire, sexual or otherwise. The tradition treats attraction itself as neutral; what becomes sinful is letting craving override commitments, consent, dignity, and self-respect.",
+    "description": "Your highest-scoring dimension is Lust (Luxuria). A high lust score indicates that intense excitement tends to win arguments with your better judgment: pursuits that promise a thrill get priority over relationships, responsibilities, or values you endorse in calmer moments. The classical remedy, chastity, is widely misunderstood; it means integrating desire with your commitments rather than pretending desire does not exist.",
+    "modernExample": "Pursuing an attraction despite an existing commitment, treating people as conquests, or acting on impulse and dealing with the consequences afterward.",
+    "misconception": "Lust is not attraction or a healthy sex life. It is desire detached from respect, consent, and the rest of your values."
+  }
+]

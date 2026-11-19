@@ -1,0 +1,224 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import sins from '../../data/sins.json';
+import { SITE } from '../../data/site';
+
+const title =
+  'What Are the Seven Deadly Sins? Meaning, Origins, List & Modern Examples';
+const description =
+  'A complete guide to the seven deadly sins: meaning and definition, historical origins, the full list with Latin names, modern examples, common misconceptions, and FAQ.';
+
+const faqs = [
+  {
+    q: 'Where did the seven deadly sins come from?',
+    a: 'The list began with eight "deadly thoughts" described by the fourth-century monk Evagrius Ponticus. His student John Cassian carried the framework to Western Europe, and Pope Gregory I consolidated the eight into seven around 590 CE. Theologians such as Thomas Aquinas later systematized them, and poets including Dante made them part of popular culture.',
+  },
+  {
+    q: 'Are the seven deadly sins mentioned in the Bible as a list of seven?',
+    a: 'No single biblical passage lists these seven in this form. The individual behaviors are discussed throughout both Testaments, but the canonical seven-item list is a product of early monastic and medieval theology, refined over several centuries rather than delivered as one text.',
+  },
+  {
+    q: 'Why is pride considered the most serious deadly sin?',
+    a: 'Because the tradition treats pride as the root from which the others grow: an inflated self-love makes envy, wrath, greed, and the rest psychologically plausible. Pride also resists correction, which is why medieval writers called it the queen of vices and placed the proud furthest along Dante\u2019s mountain of purification.',
+  },
+  {
+    q: 'Are the seven deadly sins still relevant today?',
+    a: 'Their endurance comes from describing recurring behavioral patterns rather than archaic rule-breaking. Workplace credit-stealing is pride, social-media comparison is envy, doom-scrolling is gluttony and sloth combined, and revenge fantasies are wrath. The vocabulary is medieval; the impulses are not.',
+  },
+  {
+    q: 'What is the difference between a deadly sin and an ordinary mistake?',
+    a: 'In the original framework, "deadly" (mortal) meant a settled orientation of character, not a single error. A lie told once under pressure is an act; a life organized around manipulating others is a disposition. The framework targets habits and what they do to a person over time.',
+  },
+  {
+    q: 'How do the seven heavenly virtues counter the sins?',
+    a: 'Each sin is paired with a contrary virtue that trains the opposite muscle: humility against pride, kindness against envy, patience against wrath, diligence against sloth, charity against greed, temperance against gluttony, and chastity against lust. The paired table is on the seven deadly sins and virtues page.',
+  },
+];
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  author: { '@type': 'Person', name: SITE.author.name },
+  publisher: { '@type': 'Organization', name: SITE.name, url: SITE.url + '/' },
+  datePublished: '2026-11-19',
+  dateModified: '2026-11-19',
+  mainEntityOfPage: new URL('/seven-deadly-sins/', SITE.url).href,
+};
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.q,
+    acceptedAnswer: { '@type': 'Answer', text: faq.a },
+  })),
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  path="/seven-deadly-sins/"
+  type="article"
+  publishedTime="2026-11-19"
+  jsonLd={[articleLd, faqLd]}
+>
+  <Breadcrumbs
+    items={[
+      { name: 'Home', path: '/' },
+      { name: 'Seven Deadly Sins', path: '/seven-deadly-sins/' },
+    ]}
+  />
+
+  <article class="prose-article mt-4">
+    <h1>What Are the Seven Deadly Sins? Meaning, Origins &amp; Modern Examples</h1>
+
+    <h2>Seven Deadly Sins: Meaning</h2>
+    <p>
+      The seven deadly sins &mdash; pride, envy, wrath, sloth, greed, gluttony, and lust &mdash;
+      are a classification of the deepest habitual flaws in human character. &ldquo;Deadly&rdquo;
+      does not mean unforgivable; in the framework that coined the term it means
+      <em>capital</em>, from the Latin <em>caput</em>, a head or source: these are the root
+      tendencies from which smaller failings grow. To call something a deadly sin is to say that
+      the habit, left unexamined, organizes a life around itself and damages both the person who
+      carries it and the people nearby. The list is simultaneously a theological doctrine, a
+      literary device, and &mdash; in secular use &mdash; a remarkably durable vocabulary for
+      self-knowledge.
+    </p>
+    <p>
+      Each sin has a Latin name, a contrary virtue, and a distinctive internal logic. Pride makes
+      the self the center of the story; envy cannot bear another person&rsquo;s advantage; wrath
+      nurses injury; sloth shrinks from required effort; greed refuses the concept of enough;
+      gluttony pursues sensation past satisfaction; and lust lets craving outrun commitment.
+      Understanding the seven as <em>habits of attention</em> rather than a catalogue of forbidden
+      acts is what makes the framework useful in 2026.
+    </p>
+
+    <h2>Where Do the Seven Deadly Sins Come From?</h2>
+    <p>
+      The story begins in the Egyptian desert around the year 375 CE. A monk named Evagrius
+      Ponticus described eight <em>logismoi</em>, or troublesome thoughts, that disturbed prayer
+      and ordered living: gluttony, lust, greed, sadness, anger, acedia (a weary listlessness),
+      vainglory, and pride. His student John Cassian brought these eight to southern Gaul in the
+      early fifth century, where they shaped monastic training across Western Europe for two
+      hundred years.
+    </p>
+    <p>
+      Around 590 CE, Pope Gregory I consolidated the eight into the seven still used today.
+      Vainglory was folded into pride, sadness into envy or sloth depending on its flavor, and the
+      resulting list was superbia (pride), invidia (envy), ira (wrath), acedia (sloth), avaritia
+      (greed), gula (gluttony), and luxuria (lust). Later medieval thinkers &mdash; most famously
+      Thomas Aquinas in the <em>Summa Theologiae</em> &mdash; systematized the seven as vices
+      opposed to the virtues, while Dante Alighieri built the mountain of Purgatory around them in
+      the <em>Divine Comedy</em>, embedding the list in the imagination of every generation since.
+    </p>
+    <p>
+      Two historical details are often missed. First, no single biblical passage presents the list
+      in this form; it is a developed tradition, not a verse. Second, the list was always meant as
+      practical psychology for ordinary life. Monks catalogued these patterns because they kept
+      seeing them in themselves, and the same patterns appear in offices, friendships, and
+      social-media feeds today.
+    </p>
+
+    <h2>The Seven Deadly Sins: Quick-Reference Table</h2>
+    <table>
+      <caption class="text-left mb-2 text-[var(--color-muted)]">
+        Table 1: the seven deadly sins with Latin names, contrary virtues, and a modern example of
+        each.
+      </caption>
+      <thead>
+        <tr>
+          <th scope="col">Sin</th>
+          <th scope="col">Latin</th>
+          <th scope="col">Contrary virtue</th>
+          <th scope="col">Modern example</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          sins.map((sin) => (
+            <tr>
+              <th scope="row">
+                <a href={`#${sin.slug}`}>{sin.name}</a>
+              </th>
+              <td>{sin.latin}</td>
+              <td>{sin.virtue}</td>
+              <td>{sin.modernExample}</td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+
+    <h2>The Seven Sins Explained One by One</h2>
+    {
+      sins.map((sin) => (
+        <section id={sin.slug}>
+          <h3>
+            {sin.name} (<em>{sin.latin}</em>) &mdash; opposed by {sin.virtue}
+          </h3>
+          <p>{sin.description}</p>
+          <p>
+            <strong>Modern example:</strong> {sin.modernExample}
+          </p>
+          <p>
+            <strong>Common misconception:</strong> {sin.misconception}
+          </p>
+        </section>
+      ))
+    }
+
+    <h2>Common Misconceptions About the Seven Deadly Sins</h2>
+    <h3>Misconception 1: they are a biblical top-seven list</h3>
+    <p>
+      As the history above shows, the seven-item formulation is a theological development spanning
+      two centuries, from Evagrius&rsquo;s eight thoughts to Gregory&rsquo;s consolidation.
+      Treating it as a single proof-text misunderstands how the tradition actually formed.
+    </p>
+    <h3>Misconception 2: they rank behaviors rather than dispositions</h3>
+    <p>
+      The framework targets settled character habits, not isolated acts. Losing your temper once
+      does not make wrath your defining sin; a years-long practice of replaying injuries and
+      punishing bystanders does. The question is always what pattern your choices reinforce over
+      time.
+    </p>
+    <h3>Misconception 3: the remedy is suppression</h3>
+    <p>
+      The tradition pairs every sin with a virtue to be practiced, not merely a rule to be obeyed.
+      Greed is not fixed by refusing every purchase but by exercising charity; wrath is not fixed
+      by silence but by building the gap of patience. Virtue is treated as a skill trained through
+      repetition, which aligns surprisingly well with modern habit research.
+    </p>
+    <h3>Misconception 4: the list is only about sex and food</h3>
+    <p>
+      Lust and gluttony are two of seven, and both are defined as disordered desire rather than
+      desire itself. The majority of the list &mdash; pride, envy, wrath, sloth, greed &mdash;
+      concerns how we handle status, comparison, anger, effort, and money, which are the dominant
+      moral pressures of modern working life.
+    </p>
+
+    <h2>Frequently Asked Questions</h2>
+    {
+      faqs.map((faq) => (
+        <section>
+          <h3>{faq.q}</h3>
+          <p>{faq.a}</p>
+        </section>
+      ))
+    }
+
+    <h2>Test Where You Stand</h2>
+    <p>
+      Reading about the seven sins and seeing them in yourself are different exercises. The
+      <a href="/"> seven deadly sins test on the homepage</a> uses fifteen short statements to
+      produce a percentage profile across all seven dimensions, with scoring that runs entirely in
+      your browser and stores nothing. If you want the remedy side of the framework first, continue
+      to the <a href="/seven-deadly-sins-and-virtues/">seven deadly sins and virtues</a> comparison
+      page.
+    </p>
+  </article>
+</BaseLayout>

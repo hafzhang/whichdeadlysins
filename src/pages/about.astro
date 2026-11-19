@@ -1,0 +1,86 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { SITE } from '../data/site';
+
+const title = 'About Which Deadly Sin: Method, Author & Editorial Stance';
+const description =
+  'Meet the author and method behind the Which Deadly Sin quiz: how the 15-question seven deadly sins test is built, scored, and kept independent.';
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  path="/about/"
+  type="article"
+  publishedTime="2026-11-19"
+>
+  <Breadcrumbs
+    items={[
+      { name: 'Home', path: '/' },
+      { name: 'About', path: '/about/' },
+    ]}
+  />
+
+  <article class="prose-article mt-4">
+    <h1>About Which Deadly Sin</h1>
+
+    <h2>Who writes this site</h2>
+    <!-- TODO: 上线前在 src/data/site.ts 替换为真实作者署名与简介 -->
+    <p>
+      This site is written and maintained by <strong>{SITE.author.name}</strong>,{' '}
+      {SITE.author.bio} The seven deadly sins framework has been used for more than fifteen
+      hundred years as a tool for examining character, and this project exists to make that tool
+      usable in a five-minute browser session.
+    </p>
+
+    <h2>How the quiz is built</h2>
+    <p>
+      The quiz contains <strong>15 statements</strong>. Pride is covered by three statements and
+      the other six dimensions &mdash; envy, wrath, sloth, greed, gluttony, and lust &mdash; by
+      two each. Every statement is answered on a four-point scale from <em>strongly disagree</em>
+      (0 points) to <em>strongly agree</em> (3 points).
+    </p>
+    <p>
+      Scores are normalized per dimension: your points are divided by the maximum points available
+      for that dimension and expressed as a percentage. This means the dimension with three
+      questions is not advantaged over the dimensions with two. Your dominant sin is the dimension
+      with the highest percentage; ties follow the traditional ordering that begins with pride.
+    </p>
+    <p>
+      All scoring runs <strong>locally in your browser</strong>. The site has no server-side
+      application, no database, and no user accounts. Your answers are never transmitted or stored,
+      which is also why the quiz needs no login and no email address.
+    </p>
+
+    <h2>Editorial stance and limitations</h2>
+    <p>
+      This is an editorial and educational project, not a clinical instrument. The seven deadly
+      sins are a historical and ethical framework; the quiz is not based on a validated
+      psychological assessment such as the Big Five inventory and{' '}
+      <strong>
+        does not constitute psychological, psychiatric, or medical diagnosis or treatment
+      </strong>
+      . If you are dealing with distress, compulsive behavior, or relationship harm, please consult
+      a licensed professional.
+    </p>
+    <p>
+      Content is reviewed against established historical sources &mdash; primarily the writings of
+      Evagrius Ponticus, John Cassian, Gregory I, Thomas Aquinas, and Dante Alighieri &mdash; and
+      updated when errors are found. Corrections can be sent to{' '}
+      <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>.
+    </p>
+
+    <h2>How the site is funded</h2>
+    <p>
+      The site is free to use and currently carries no advertising and no paid placements. If
+      affiliate or sponsored links are ever introduced, they will be disclosed on the page where
+      they appear and will never influence the quiz or its scoring.
+    </p>
+
+    <p>
+      Start with the <a href="/">seven deadly sins test on the homepage</a> or read the full{' '}
+      <a href="/seven-deadly-sins/">seven deadly sins guide</a>.
+    </p>
+  </article>
+</BaseLayout>

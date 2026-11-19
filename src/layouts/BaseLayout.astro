@@ -1,0 +1,155 @@
+---
+import '../styles/global.css';
+import JsonLd from '../components/JsonLd.astro';
+import { SITE, NAV_LINKS } from '../data/site';
+
+export interface Props {
+  title: string;
+  description: string;
+  /** 站内路径，统一带尾斜杠，首页传 '/' */
+  path: string;
+  ogImage?: string;
+  type?: 'website' | 'article';
+  publishedTime?: string;
+  noindex?: boolean;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const {
+  title,
+  description,
+  path,
+  ogImage = '/og/default.png',
+  type = 'website',
+  publishedTime,
+  noindex = false,
+  jsonLd,
+} = Astro.props;
+
+const canonical = new URL(path, SITE.url).href;
+const ogImageUrl = new URL(ogImage, SITE.url).href;
+const cfToken = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN;
+const year = new Date().getFullYear();
+
+const websiteLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: SITE.name,
+  url: SITE.url + '/',
+  description:
+    'Take a free 15-question seven deadly sins test and get instant percentage results across pride, envy, wrath, sloth, greed, gluttony, and lust.',
+  inLanguage: 'en',
+};
+
+const organizationLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: SITE.name,
+  url: SITE.url + '/',
+  logo: new URL('/favicon.svg', SITE.url).href,
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#1a1726" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow'} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content={type} />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content={String(SITE.ogSize.width)} />
+    <meta property="og:image:height" content={String(SITE.ogSize.height)} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:locale" content="en_US" />
+    {publishedTime && <meta property="article:published_time" content={publishedTime} />}
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <JsonLd data={[websiteLd, organizationLd]} />
+    {
+      Array.isArray(jsonLd) ? (
+        jsonLd.map((item) => <JsonLd data={item} />)
+      ) : jsonLd ? (
+        <JsonLd data={jsonLd} />
+      ) : null
+    }
+
+    <!-- Cloudflare Web Analytics：无 cookie、不采集个人身份信息；token 缺失时不注入 -->
+    {
+      cfToken && (
+        <script
+          is:inline
+          defer
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon={JSON.stringify({ token: cfToken })}
+        />
+      )
+    }
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <header class="border-b border-[var(--color-line)] bg-white/80 backdrop-blur sticky top-0 z-10">
+      <div class="max-w-5xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+        <a href="/" class="font-bold text-lg no-underline text-[var(--color-ink)]">
+          Which Deadly Sin<span class="text-[var(--color-gold)]">?</span>
+        </a>
+        <nav aria-label="Main navigation">
+          <ul class="flex flex-wrap gap-x-5 gap-y-1 list-none p-0 m-0 text-sm md:text-base">
+            {
+              NAV_LINKS.map((link) => (
+                <li>
+                  <a
+                    href={link.path}
+                    aria-current={path === link.path ? 'page' : undefined}
+                    class="no-underline hover:underline"
+                    class:font-bold={path === link.path}
+                  >
+                    {link.name}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main class="flex-1 w-full max-w-5xl mx-auto px-4 py-8 md:py-12">
+      <slot />
+    </main>
+
+    <footer class="border-t border-[var(--color-line)] bg-white">
+      <div class="max-w-5xl mx-auto px-4 py-8 text-sm text-[var(--color-muted)] flex flex-col gap-3">
+        <nav aria-label="Footer">
+          <ul class="flex flex-wrap gap-x-5 gap-y-1 list-none p-0 m-0">
+            <li><a href="/about/" class="no-underline hover:underline">About</a></li>
+            <li><a href="/privacy/" class="no-underline hover:underline">Privacy</a></li>
+            <li><a href="/terms/" class="no-underline hover:underline">Terms</a></li>
+            <li><a href="/seven-deadly-sins/" class="no-underline hover:underline">Seven Deadly Sins Guide</a></li>
+          </ul>
+        </nav>
+        <p class="m-0">
+          For entertainment and reflection only. This quiz does not provide psychological or
+          medical diagnosis. &copy; {year} whichdeadlysins.com
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

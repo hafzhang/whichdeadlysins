@@ -1,0 +1,103 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { SITE } from '../data/site';
+
+const title = 'Terms of Use: Entertainment Purpose, No Medical or Psychological Diagnosis';
+const description =
+  'Terms of use for Which Deadly Sin: the quiz is for entertainment and reflection only, does not provide diagnosis, and is provided without warranty.';
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  path="/terms/"
+  type="article"
+  publishedTime="2026-11-19"
+>
+  <Breadcrumbs
+    items={[
+      { name: 'Home', path: '/' },
+      { name: 'Terms', path: '/terms/' },
+    ]}
+  />
+
+  <article class="prose-article mt-4">
+    <h1>Terms of Use</h1>
+    <p>Last updated: 19 November 2026</p>
+
+    <h2>1. Acceptance</h2>
+    <p>
+      By accessing whichdeadlysins.com (the &ldquo;Site&rdquo;) you agree to these terms. If you do
+      not agree, please do not use the Site.
+    </p>
+
+    <h2>2. Entertainment and reflection only</h2>
+    <p>
+      The quiz, results, and articles on the Site are provided for entertainment, education, and
+      personal reflection only. They are <strong>not</strong> medical, psychological, psychiatric,
+      or diagnostic services, are not validated clinical assessments, and must not be used as a
+      substitute for professional advice. Never disregard professional guidance or delay seeking
+      help because of something you read on this Site. If you are in crisis, contact local
+      emergency services or a crisis support line in your country.
+    </p>
+
+    <h2>3. No warranty</h2>
+    <p>
+      The Site and its content are provided &ldquo;as is&rdquo; without warranties of any kind,
+      whether express or implied, including fitness for a particular purpose, accuracy, or
+      uninterrupted availability. Quiz results reflect your self-reported answers through a simple
+      scoring formula and may be incomplete, inaccurate, or unsuitable for any specific decision.
+    </p>
+
+    <h2>4. Limitation of liability</h2>
+    <p>
+      To the fullest extent permitted by law, the Site and its operators are not liable for any
+      direct, indirect, incidental, or consequential damages arising from use of the Site or
+      reliance on its content, including decisions about relationships, employment, health, or
+      legal matters.
+    </p>
+
+    <h2>5. Intellectual property</h2>
+    <p>
+      The Site&rsquo;s text, quizzes, graphics, and generated share images are protected by
+      applicable copyright laws. You may share short excerpts with attribution and a link, and you
+      may share your personal quiz result. Republishing whole articles or mechanically copying the
+      question set requires written permission via{' '}
+      <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>.
+    </p>
+
+    <h2>6. Acceptable use</h2>
+    <p>
+      Do not attempt to disrupt the Site, probe its infrastructure, bypass security measures, or
+      use automated systems to scrape content at a scale that degrades service for others. The quiz
+      requires no registration, so any form of fake-account automation is also unnecessary.
+    </p>
+
+    <h2>7. External links</h2>
+    <p>
+      The Site may link to third-party websites for reference. We do not control and are not
+      responsible for the content, privacy practices, or availability of those sites.
+    </p>
+
+    <h2>8. Changes and termination</h2>
+    <p>
+      We may update these terms or modify or discontinue any feature of the Site at any time.
+      Continued use after changes constitutes acceptance of the revised terms.
+    </p>
+
+    <h2>9. Governing law</h2>
+    <!-- TODO: 上线前与运营主体确认适用法域后替换 -->
+    <p>
+      These terms are governed by the laws applicable to the operating entity of the Site, without
+      regard to conflict-of-law rules. Any disputes will be resolved in the competent courts of
+      that jurisdiction.
+    </p>
+
+    <h2>10. Contact</h2>
+    <p>
+      Questions about these terms can be sent to{' '}
+      <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>.
+    </p>
+  </article>
+</BaseLayout>

@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = 'Page Not Found (404) | Which Deadly Sin';
+const description =
+  'The page you are looking for does not exist. Return to the seven deadly sins quiz or the main guide.';
+---
+
+<BaseLayout title={title} description={description} path="/404/" noindex>
+  <section class="max-w-2xl py-10 text-center">
+    <h1 class="text-5xl">404</h1>
+    <p class="text-lg mt-3">
+      That page has slipped off the map. The good news: the main paths are still well marked.
+    </p>
+    <div class="mt-8 flex flex-wrap justify-center gap-4">
+      <a
+        href="/"
+        class="rounded-full bg-[var(--color-ink)] text-white px-6 py-3 font-semibold no-underline hover:opacity-90"
+      >
+        Take the quiz
+      </a>
+      <a
+        href="/seven-deadly-sins/"
+        class="rounded-full border-2 border-[var(--color-ink)] px-6 py-3 font-semibold no-underline hover:bg-[var(--color-ink)] hover:text-white"
+      >
+        Seven deadly sins guide
+      </a>
+    </div>
+  </section>
+</BaseLayout>

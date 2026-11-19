@@ -1,0 +1,16 @@
+{
+  "name": "Which Deadly Sin Are You?",
+  "short_name": "Deadly Sin Quiz",
+  "description": "A free 15-question seven deadly sins test with instant percentage results.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1a1726",
+  "theme_color": "#1a1726",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
