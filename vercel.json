@@ -1,0 +1,10 @@
+{
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "whichdeadlysins.com" }],
+      "destination": "https://www.whichdeadlysins.com/$1",
+      "permanent": true
+    }
+  ]
+}

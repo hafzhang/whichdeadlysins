@@ -1,5 +1,5 @@
 export const SITE = {
-  url: 'https://whichdeadlysins.com',
+  url: 'https://www.whichdeadlysins.com',
   name: 'Which Deadly Sin Are You?',
   shortName: 'Deadly Sin Quiz',
   // TODO: 上线前替换为真实作者署名（product.md 要求 About 页有真实作者）

@@ -6,7 +6,8 @@ import tailwindcss from '@tailwindcss/vite';
 
 // 全站 SSG：构建期输出纯静态 HTML，Vercel 自动识别 Astro 项目并托管静态产物
 export default defineConfig({
-  site: 'https://whichdeadlysins.com',
+  // 首选域为 www：sitemap、页面内绝对 URL 均以此为准，裸域由 vercel.json 301 到 www
+  site: 'https://www.whichdeadlysins.com',
   output: 'static',
   build: {
     // 统一尾斜杠目录形式：/seven-deadly-sins/ -> /seven-deadly-sins/index.html
