@@ -5,6 +5,16 @@
       "has": [{ "type": "host", "value": "whichdeadlysins.com" }],
       "destination": "https://www.whichdeadlysins.com/$1",
       "permanent": true
+    },
+    {
+      "source": "/seven-deadly-sins-list",
+      "destination": "/seven-deadly-sins/list/",
+      "permanent": true
+    },
+    {
+      "source": "/seven-deadly-sins-list/",
+      "destination": "/seven-deadly-sins/list/",
+      "permanent": true
     }
   ]
 }

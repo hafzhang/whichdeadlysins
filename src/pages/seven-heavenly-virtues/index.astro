@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { VIRTUES } from '../../data/virtues';
 import sins from '../../data/sins.json';
-import { SITE } from '../../data/site';
+import { SITE, ARTICLE_AUTHOR } from '../../data/site';
 
 const title =
   'The Seven Heavenly Virtues: Meanings, Latin Names & the Sins They Oppose';
@@ -107,7 +107,7 @@ const articleLd = {
   '@type': 'Article',
   headline: title,
   description,
-  author: { '@type': 'Person', name: SITE.author.name },
+  author: ARTICLE_AUTHOR,
   publisher: { '@type': 'Organization', name: SITE.name, url: SITE.url + '/' },
   datePublished: '2026-11-23',
   dateModified: '2026-11-23',
@@ -170,7 +170,7 @@ const faqLd = {
           VIRTUES.map((virtue) => (
             <tr>
               <th scope="row">
-                <a href={`/seven-heavenly-virtues/#${virtue.pairedSin}`}>{virtue.name}</a>
+                <a href={`/seven-heavenly-virtues/#${virtue.slug}`}>{virtue.name}</a>
               </th>
               <td>
                 <em>{virtue.latin}</em>
@@ -196,7 +196,7 @@ const faqLd = {
         const guide = virtueGuides[virtue.slug];
         const sin = sinBySlug[virtue.pairedSin];
         return (
-          <section id={virtue.pairedSin}>
+          <section id={virtue.slug}>
             <h3>
               {virtue.name} (<em>{virtue.latin}</em>) &mdash; the remedy for {sin.name.toLowerCase()} (
               <em>{sin.latin}</em>)
@@ -244,7 +244,7 @@ const faqLd = {
     <p>
       Measure the corrective side directly with the{' '}
       <a href="/seven-virtues-quiz/">seven heavenly virtues quiz</a>, or study the sin side of each
-      pairing: the <a href="/seven-deadly-sins-list/">seven deadly sins list</a> shows all seven in
+      pairing: the <a href="/seven-deadly-sins/list/">seven deadly sins list</a> shows all seven in
       traditional order with links to a full guide on every sin, and the{' '}
       <a href="/seven-deadly-sins/">seven deadly sins overview</a> covers the history and meaning of
       the whole framework.

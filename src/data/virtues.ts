@@ -21,7 +21,7 @@ export const VIRTUES: VirtueMeta[] = [
     summary: 'An honest view of your own limits and a willingness to share credit.',
     description:
       'Your strongest virtue is Humility (Humilitas), the contrary of pride. Humility is not self-deprecation; it is an accurate view of yourself that leaves room for other people\u2019s contributions. You can admit mistakes, ask for help without shame, and celebrate wins without needing every eye on you. Because your self-worth does not depend on ranking above others, criticism becomes information rather than an attack.',
-    href: '/seven-heavenly-virtues/#pride',
+    href: '/seven-heavenly-virtues/#humility',
   },
   {
     slug: 'kindness',
@@ -32,7 +32,7 @@ export const VIRTUES: VirtueMeta[] = [
     summary: 'Willing good for others, including people whose advantages sting.',
     description:
       'Your strongest virtue is Kindness (Benignitas), the contrary of envy. You can feel genuine pleasure at another person\u2019s good fortune even when it highlights something you lack. Instead of comparing and resenting, you congratulate, encourage, and speak well of people behind their backs. Repeated often, this habit dissolves envy because the same person cannot remain a rival while being a beneficiary of your goodwill.',
-    href: '/seven-heavenly-virtues/#envy',
+    href: '/seven-heavenly-virtues/#kindness',
   },
   {
     slug: 'patience',
@@ -43,7 +43,7 @@ export const VIRTUES: VirtueMeta[] = [
     summary: 'The capacity to hold the space between a trigger and a response.',
     description:
       'Your strongest virtue is Patience (Patientia), the contrary of wrath. You have trained the gap between stimulus and response: delays, small mistakes, and minor insults rarely hijack your behavior. Patience does not mean suppressing anger or accepting injustice; it means deciding what to do while calm, so your actions remain proportionate and constructive instead of becoming another problem to repair.',
-    href: '/seven-heavenly-virtues/#wrath',
+    href: '/seven-heavenly-virtues/#patience',
   },
   {
     slug: 'diligence',
@@ -54,7 +54,7 @@ export const VIRTUES: VirtueMeta[] = [
     summary: 'Steady, modest effort applied before motivation arrives.',
     description:
       'Your strongest virtue is Diligence (Diligentia), the contrary of sloth. You start before you feel ready and trust small beginnings: a ten-minute session, one paragraph, a single email. Because you work steadily instead of waiting for deadline panic, obligations rarely become emergencies. Diligence coexists with genuine rest; what it refuses is the passive avoidance of duties you actually care about.',
-    href: '/seven-heavenly-virtues/#sloth',
+    href: '/seven-heavenly-virtues/#diligence',
   },
   {
     slug: 'charity',
@@ -65,7 +65,7 @@ export const VIRTUES: VirtueMeta[] = [
     summary: 'Deliberate release of money, time, credit, and information.',
     description:
       'Your strongest virtue is Charity (Caritas), the contrary of greed. You give on purpose and before you feel you can spare it: money, time, attention, useful knowledge, and public credit. Each act of unforced giving is evidence that enough exists, which loosens the hoarding instinct. In the older vocabulary this virtue is also called generosity of spirit, and it covers how you treat people who can never repay you.',
-    href: '/seven-heavenly-virtues/#greed',
+    href: '/seven-heavenly-virtues/#charity',
   },
   {
     slug: 'temperance',
@@ -76,7 +76,7 @@ export const VIRTUES: VirtueMeta[] = [
     summary: 'Deliberate consumption and the ability to stop at enough.',
     description:
       'Your strongest virtue is Temperance (Temperantia), the contrary of gluttony. You decide in advance how much is enough and notice the difference between genuine need and comfort-seeking, whether the appetite is food, alcohol, streaming, or the reflexive reach for a phone. Temperance is not abstinence; it is the freedom to choose an appetite instead of being commanded by it.',
-    href: '/seven-heavenly-virtues/#gluttony',
+    href: '/seven-heavenly-virtues/#temperance',
   },
   {
     slug: 'chastity',
@@ -87,7 +87,7 @@ export const VIRTUES: VirtueMeta[] = [
     summary: 'Desire integrated with your commitments and respect for others.',
     description:
       'Your strongest virtue is Chastity (Castitas), the contrary of lust and the most misunderstood of the seven virtues. It does not mean the absence of attraction; it means desire is integrated with your commitments, boundaries, and respect for other people. You can feel intense longing without treating it as a command, which keeps romantic and physical choices consistent with the rest of your values.',
-    href: '/seven-heavenly-virtues/#lust',
+    href: '/seven-heavenly-virtues/#chastity',
   },
 ];
 

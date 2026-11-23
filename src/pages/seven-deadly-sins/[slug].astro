@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { SIN_PAGES } from '../../data/sin-pages';
-import { SITE } from '../../data/site';
+import { SITE, ARTICLE_AUTHOR } from '../../data/site';
 
 export function getStaticPaths() {
   return SIN_PAGES.map((page) => ({
@@ -18,7 +18,7 @@ const articleLd = {
   '@type': 'Article',
   headline: page.title,
   description: page.description,
-  author: { '@type': 'Person', name: SITE.author.name },
+  author: ARTICLE_AUTHOR,
   publisher: { '@type': 'Organization', name: SITE.name, url: SITE.url + '/' },
   datePublished: '2026-11-23',
   dateModified: '2026-11-23',
@@ -76,7 +76,7 @@ const next = SIN_PAGES[(index + 1) % SIN_PAGES.length];
       }
     </ul>
 
-    <h2>The Opposing Virtue: {page.virtue}</h2>
+    <h2>The Opposing Virtue: <a href={`/seven-heavenly-virtues/#${page.virtue.toLowerCase()}`}>{page.virtue}</a></h2>
     {page.opposing.map((paragraph) => <p>{paragraph}</p>)}
 
     <h2>Common Misconceptions About {page.name}</h2>
@@ -105,15 +105,27 @@ const next = SIN_PAGES[(index + 1) % SIN_PAGES.length];
       <a href={`/seven-deadly-sins/${prev.slug}/`}>guide to {prev.name.toLowerCase()} ({prev.latin})</a>{' '}
       or the <a href={`/seven-deadly-sins/${next.slug}/`}>guide to {next.name.toLowerCase()} ({next.latin})</a>,
       or return to the <a href="/seven-deadly-sins/">seven deadly sins</a> overview for the history
-      of the whole list. The <a href="/seven-deadly-sins-list/">seven deadly sins list</a> shows all
+      of the whole list. The <a href="/seven-deadly-sins/list/">seven deadly sins list</a> shows all
       seven in traditional order, and the{' '}
       <a href="/seven-deadly-sins-and-virtues/">sins and virtues</a> page pairs each sin with its
-      contrary virtue — {page.name.toLowerCase()} is opposed by {page.virtue.toLowerCase()}.
+      contrary virtue — {page.name.toLowerCase()} is opposed by{' '}
+      <a href={`/seven-heavenly-virtues/#${page.virtue.toLowerCase()}`}>{page.virtue.toLowerCase()}</a>.
     </p>
     <p>
       Curious where {page.name.toLowerCase()} shows up in your own habits? The free{' '}
       <a href="/">seven deadly sins test</a> scores all seven dimensions in about five minutes, and
       if {page.name.toLowerCase()} is your strongest, your result links straight back to this guide.
     </p>
+
+    <nav aria-label="Seven deadly sins">
+      <h2>All Seven Deadly Sins</h2>
+      <ul>
+        {SIN_PAGES.filter((item) => item.slug !== page.slug).map((item) => (
+          <li>
+            <a href={`/seven-deadly-sins/${item.slug}/`}>{item.name} ({item.latin})</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
   </article>
 </BaseLayout>

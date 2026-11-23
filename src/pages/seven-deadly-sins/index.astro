@@ -2,12 +2,12 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import sins from '../../data/sins.json';
-import { SITE } from '../../data/site';
+import { SITE, ARTICLE_AUTHOR } from '../../data/site';
 
 const title =
-  'What Are the Seven Deadly Sins? Meaning, Origins, List & Modern Examples';
+  'What Are the Seven Deadly Sins? Meaning, Origins & List';
 const description =
-  'A complete guide to the seven deadly sins: meaning and definition, historical origins, the full list with Latin names, modern examples, common misconceptions, and FAQ.';
+  'The seven deadly sins explained: meaning and definition, where the list came from, all seven with Latin names, modern examples, and common misconceptions.';
 
 const faqs = [
   {
@@ -41,7 +41,7 @@ const articleLd = {
   '@type': 'Article',
   headline: title,
   description,
-  author: { '@type': 'Person', name: SITE.author.name },
+  author: ARTICLE_AUTHOR,
   publisher: { '@type': 'Organization', name: SITE.name, url: SITE.url + '/' },
   datePublished: '2026-11-19',
   dateModified: '2026-11-23',
@@ -222,7 +222,7 @@ const faqLd = {
       produce a percentage profile across all seven dimensions, with scoring that runs entirely in
       your browser and stores nothing. If you want the remedy side of the framework first, continue
       to the <a href="/seven-deadly-sins-and-virtues/">seven deadly sins and virtues</a> comparison
-      page, or browse the full <a href="/seven-deadly-sins-list/">seven deadly sins list</a> in
+      page, or browse the full <a href="/seven-deadly-sins/list/">seven deadly sins list</a> in
       traditional order and the complete guide to the{' '}
       <a href="/seven-heavenly-virtues/">seven heavenly virtues</a>.
     </p>

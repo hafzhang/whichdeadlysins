@@ -2,7 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import sins from '../../data/sins.json';
-import { SITE } from '../../data/site';
+import { SITE, ARTICLE_AUTHOR } from '../../data/site';
 
 const title = 'Seven Deadly Sins and Virtues: The Seven Contrary Virtues Explained';
 const description =
@@ -10,19 +10,19 @@ const description =
 
 const pairNotes: Record<string, string> = {
   pride:
-    'Humility is not self-contempt; it is an honest accounting of your actual limits and debts. Where pride demands credit and rank, humility lets you share wins, admit mistakes quickly, and ask for help without feeling diminished. Practically, it sounds like saying "I was wrong" out loud and naming the people whose work made yours possible.',
+    'Humility is an honest account of your own limits and debts, so wins can be shared and "I was wrong" said without feeling diminished.',
   envy:
-    'Kindness here means actively willing good for the person whose advantages sting. The training is concrete: congratulate the rival who got the promotion, say the generous thing about the friend\u2019s good news in the moment you least want to. Repeated often enough, admiration replaces resentment because the same person can no longer be both a threat and a beneficiary of your goodwill.',
+    'Kindness actively wills good for the person whose advantage stings, so admiration replaces the resentment before it sets.',
   wrath:
-    'Patience is the capacity to hold the space between a trigger and a response. It does not require denying anger or accepting injustice; it means refusing to act while the anger is steering. Slow breathing, a mandatory delay before sending heated messages, and choosing consequences calmly instead of lashing out are the ordinary drills of this virtue.',
+    'Patience holds the gap between a trigger and a response, keeping anger a tool you use rather than a master that uses you.',
   sloth:
-    'Diligence applies steady, modest effort before motivation shows up. The classic technique is committing to the smallest possible start &mdash; ten minutes, one paragraph, a single email &mdash; because acedia thrives on the overwhelming whole task and starves on tiny beginnings. Rest remains scheduled and deliberate; diligence is the opposite of avoidance, not the opposite of rest.',
+    'Diligence applies small, steady effort before motivation arrives, refusing avoidance without refusing scheduled rest.',
   greed:
-    'Charity in this pairing means deliberate release: giving money, time, credit, or useful information away on purpose and before you feel you can spare it. Because greed is fear of insufficiency wearing the mask of prudence, generosity is its direct counter-evidence. Every act of unforced giving proves that enough exists, loosening the hoarding instinct one repetition at a time.',
+    'Charity releases money, time, credit, and information on purpose, before you feel you can spare them.',
   gluttony:
-    'Temperance is deliberate consumption rather than abstinence. It means deciding in advance how much is enough, noticing the difference between genuine need and comfort-seeking, and stopping while still slightly unsatisfied so that appetite stops setting the boundary. It applies equally to food, alcohol, streaming, and the reflexive reach for the phone in every quiet moment.',
+    'Temperance decides how much is enough in advance and stops there, applied to food, drink, screens, and the phone.',
   lust:
-    'Chastity is the most misunderstood of the seven virtues: it means integrating desire with your commitments and respect for other people, not eliminating attraction. It asks whether a longing is being treated as a command. Honest boundaries, transparency with partners, and a pause before acting on intensity are its everyday practice, whatever your relationship status.',
+    'Chastity integrates desire with your commitments and respect for others, treating attraction as information rather than a command.',
 };
 
 const articleLd = {
@@ -30,7 +30,7 @@ const articleLd = {
   '@type': 'Article',
   headline: title,
   description,
-  author: { '@type': 'Person', name: SITE.author.name },
+  author: ARTICLE_AUTHOR,
   publisher: { '@type': 'Organization', name: SITE.name, url: SITE.url + '/' },
   datePublished: '2026-11-19',
   dateModified: '2026-11-19',
@@ -60,8 +60,9 @@ const articleLd = {
       is matched with a <strong>contrary virtue</strong> &mdash; a trained habit that pulls
       character in the opposite direction. The pairing is practical rather than poetic: if a sin is
       a groove worn into behavior by repetition, the contrary virtue is a new groove cut beside it.
-      This page gives you the complete seven-by-seven table in one glance, then walks through every
-      pair in plain language. For the full definition and history of each sin, start with the
+      This page gives you the complete seven-by-seven table in one glance &mdash; each sin linked
+      to its full guide, each virtue linked to the practice that countertrains it. For the full
+      definition and history of each sin, start with the
       <a href="/seven-deadly-sins/"> seven deadly sins guide</a>.
     </p>
 
@@ -87,7 +88,9 @@ const articleLd = {
               </th>
               <td>{sin.latin}</td>
               <td>
-                <strong>{sin.virtue}</strong>
+                <strong>
+                  <a href={`/seven-heavenly-virtues/#${sin.virtue.toLowerCase()}`}>{sin.virtue}</a>
+                </strong>
               </td>
               <td>{pairNotes[sin.slug]}</td>
             </tr>
@@ -96,22 +99,26 @@ const articleLd = {
       </tbody>
     </table>
 
-    <h2>Each Pair Explained</h2>
-    {
-      sins.map((sin) => (
-        <section id={sin.slug}>
-          <h3>
-            <a href={`/seven-deadly-sins/${sin.slug}/`}>{sin.name}</a> vs. {sin.virtue}
-          </h3>
-          <p>
-            <strong>The sin:</strong> {sin.summary}
-          </p>
-          <p>
-            <strong>The virtue in practice:</strong> {pairNotes[sin.slug]}
-          </p>
-        </section>
-      ))
-    }
+    <h2>Where the Contrary Virtues Come From</h2>
+    <p>
+      Pairing every vice with a remedial virtue is older than the seven-item list it now serves.
+      The instinct runs back to Greek ethics, where Aristotle described virtue as a trained habit
+      lying between two extremes, and it entered Christian moral teaching through the desert monks
+      who treated each recurring thought as a condition to be countered rather than merely
+      forbidden. By the time Pope Gregory I fixed the seven deadly sins around 590 CE, the matching
+      remedies were already circulating as a teaching device: a vice named precisely enough to be
+      recognized could also be answered by a named practice.
+    </p>
+    <p>
+      Two features of the pairing are easy to miss. First, it is remedial rather than cosmetic
+      &mdash; each contrary virtue is chosen because it targets the mechanism of its sin, not
+      because the word sounds opposite. Pride protects a ranking, so humility restores accurate
+      self-knowledge; greed fears insufficiency, so charity supplies the counter-evidence that
+      enough already exists. Second, the seven contrary virtues are not the same set as the four
+      cardinal virtues joined to the three theological ones. This page covers the contrary-virtues
+      set specifically, because it is the one that maps one-to-one onto the deadly sins and can be
+      read straight across the table above.
+    </p>
 
     <h2>How to Use the Pairings</h2>
     <p>
@@ -127,7 +134,7 @@ const articleLd = {
       Return to the <a href="/seven-deadly-sins/">seven deadly sins overview</a> for origins,
       definitions, modern examples, and misconceptions, or browse the remedy side directly in the
       guide to the <a href="/seven-heavenly-virtues/">seven heavenly virtues</a> and the{' '}
-      <a href="/seven-deadly-sins-list/">seven deadly sins list</a> in traditional order. To put
+      <a href="/seven-deadly-sins/list/">seven deadly sins list</a> in traditional order. To put
       the framework to work: take the fifteen-question <a href="/">seven deadly sins test</a> to
       find your dominant sin, then take the matching{' '}
       <a href="/seven-virtues-quiz/">seven heavenly virtues quiz</a> to see which corrective virtue

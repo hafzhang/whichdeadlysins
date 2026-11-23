@@ -1,12 +1,12 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Breadcrumbs from '../../components/Breadcrumbs.astro';
-import sins from '../../data/sins.json';
-import { SITE } from '../../data/site';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import sins from '../../../data/sins.json';
+import { SITE, ARTICLE_AUTHOR } from '../../../data/site';
 
 const title = 'The Seven Deadly Sins List: All 7 Sins in Order with Latin Names';
 const description =
-  'The complete seven deadly sins list in traditional order: pride, envy, wrath, sloth, greed, gluttony, and lust, with Latin names, one-line definitions, links to full guides, and the history of how the order was set.';
+  'All seven deadly sins in traditional order: pride, envy, wrath, sloth, greed, gluttony, and lust, with Latin names and one-line definitions.';
 
 /** 一句话定义（独立撰写，与 sins.json 的 summary 不重复） */
 const oneLiners: Record<string, string> = {
@@ -83,11 +83,11 @@ const articleLd = {
   '@type': 'Article',
   headline: title,
   description,
-  author: { '@type': 'Person', name: SITE.author.name },
+  author: ARTICLE_AUTHOR,
   publisher: { '@type': 'Organization', name: SITE.name, url: SITE.url + '/' },
   datePublished: '2026-11-23',
   dateModified: '2026-11-23',
-  mainEntityOfPage: new URL('/seven-deadly-sins-list/', SITE.url).href,
+  mainEntityOfPage: new URL('/seven-deadly-sins/list/', SITE.url).href,
 };
 
 const faqLd = {
@@ -116,7 +116,7 @@ const itemListLd = {
 <BaseLayout
   title={title}
   description={description}
-  path="/seven-deadly-sins-list/"
+  path="/seven-deadly-sins/list/"
   type="article"
   publishedTime="2026-11-23"
   jsonLd={[articleLd, faqLd, itemListLd]}
@@ -124,7 +124,8 @@ const itemListLd = {
   <Breadcrumbs
     items={[
       { name: 'Home', path: '/' },
-      { name: 'Seven Deadly Sins List', path: '/seven-deadly-sins-list/' },
+      { name: 'Seven Deadly Sins', path: '/seven-deadly-sins/' },
+      { name: 'List', path: '/seven-deadly-sins/list/' },
     ]}
   />
 
