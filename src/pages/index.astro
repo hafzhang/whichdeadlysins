@@ -12,7 +12,7 @@ const description =
 
 const sinDimensions = sins.map((sin) => ({
   ...sin,
-  href: `/seven-deadly-sins/#${sin.slug}`,
+  href: `/seven-deadly-sins/${sin.slug}/`,
 }));
 
 const faqs = [
@@ -169,7 +169,7 @@ const faqLd = {
       sins.map((sin) => (
         <p>
           <strong>
-            <a href={`/seven-deadly-sins/#${sin.slug}`}>{sin.name}</a> ({sin.latin})
+            <a href={`/seven-deadly-sins/${sin.slug}/`}>{sin.name}</a> ({sin.latin})
           </strong>
           &nbsp;&mdash; {sin.summary}
         </p>
@@ -202,11 +202,13 @@ const faqLd = {
     <h2>Ready to Begin?</h2>
     <p>
       Scroll back to the quiz above and work through the fifteen statements honestly. When your
-      profile appears, follow the link inside your dominant-sin result to read its full section in
-      the <a href="/seven-deadly-sins/">seven deadly sins guide</a>, or compare every sin with its
-      remedy on the <a href="/seven-deadly-sins-and-virtues/">sins and virtues</a> page. When you
-      finish, take the matching <a href="/seven-virtues-quiz/">seven heavenly virtues quiz</a> to
-      measure the corrective side of the same seven dimensions.
+      profile appears, follow the link inside your dominant-sin result to read its full guide
+      &mdash; definition, Latin origin, modern examples, opposing virtue, and FAQ. You can also
+      browse the <a href="/seven-deadly-sins-list/">seven deadly sins list</a> in traditional
+      order, or compare every sin with its remedy on the{' '}
+      <a href="/seven-deadly-sins-and-virtues/">sins and virtues</a> page. When you finish, take
+      the matching <a href="/seven-virtues-quiz/">seven heavenly virtues quiz</a> to measure the
+      corrective side of the same seven dimensions.
     </p>
   </article>
 </BaseLayout>

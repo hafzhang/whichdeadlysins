@@ -1,0 +1,253 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import sins from '../../data/sins.json';
+import { SITE } from '../../data/site';
+
+const title = 'The Seven Deadly Sins List: All 7 Sins in Order with Latin Names';
+const description =
+  'The complete seven deadly sins list in traditional order: pride, envy, wrath, sloth, greed, gluttony, and lust, with Latin names, one-line definitions, links to full guides, and the history of how the order was set.';
+
+/** 一句话定义（独立撰写，与 sins.json 的 summary 不重复） */
+const oneLiners: Record<string, string> = {
+  pride: 'Inflated self-regard that ranks you above others and defends the ranking against the truth.',
+  envy: 'Resentment of another person’s good fortune, wishing their advantage were gone.',
+  wrath: 'Anger that escapes its purpose and escalates, lingers, and punishes beyond the offense.',
+  sloth: 'Avoidance of the meaningful effort your own values demand, through restless distraction.',
+  greed: 'Acquisition and hoarding past any point of enough, ruled by fear of insufficiency.',
+  gluttony: 'Consumption past satisfaction, on autopilot, doing emotional work without choice.',
+  lust: 'Intense desire that outruns judgment, overriding commitments and consent.',
+};
+
+// 传统严重程度顺序（最重到最轻），与 sins.json 顺序一致
+const traditionalOrder = sins.map((sin) => ({
+  slug: sin.slug,
+  name: sin.name,
+  latin: sin.latin,
+  virtue: sin.virtue,
+  oneLiner: oneLiners[sin.slug],
+}));
+
+// Evagrius 的原始八念顺序（最轻到最重）
+const evagriusOrder = [
+  'Gluttony',
+  'Lust',
+  'Greed',
+  'Sadness (later folded into sloth and envy)',
+  'Wrath',
+  'Acedia (sloth)',
+  'Vainglory (later folded into pride)',
+  'Pride',
+];
+
+// Dante 炼狱山从山脚到山顶的层级（最重到最轻）
+const danteOrder = [
+  'Pride — terrace 1, at the mountain’s base',
+  'Envy — terrace 2',
+  'Wrath — terrace 3',
+  'Sloth — terrace 4',
+  'Greed (avarice) — terrace 5',
+  'Gluttony — terrace 6',
+  'Lust — terrace 7, at the summit’s edge',
+];
+
+const faqs = [
+  {
+    q: 'What is the order of the seven deadly sins?',
+    a: 'There is no single official order, because the list is a tradition rather than a decree. The most commonly cited order, from most serious to least, runs pride, envy, wrath, sloth, greed, gluttony, lust — the ranking Dante used on the mountain of Purgatory. Gregory I’s sixth-century consolidation ranked them from least to most dangerous, ending with pride as the root of the others.',
+  },
+  {
+    q: 'What are the seven deadly sins in order of severity?',
+    a: 'By the traditional hierarchy: pride first and worst, then envy, wrath, sloth, greed (avarice), gluttony, and lust. Pride is ranked most severe because it is treated as the root the other six grow from; lust is ranked least severe because, as Dante noted, it at least aims at contact with another person rather than at another person’s harm.',
+  },
+  {
+    q: 'What are the Latin names of the seven deadly sins?',
+    a: 'Pride is superbia, envy invidia, wrath ira, sloth acedia, greed avaritia (also avarice in English), gluttony gula, and lust luxuria. These are the forms Gregory I used in his sixth-century consolidation, and they remain the standard Latin names in theology and literature.',
+  },
+  {
+    q: 'Who decided which sins make the list?',
+    a: 'The list evolved over two centuries rather than being issued at once. Evagrius Ponticus described eight evil thoughts around 375 CE; his student John Cassian carried them to Western Europe; and Pope Gregory I reduced the eight to seven around 590 CE, folding vainglory into pride and sadness into sloth and envy. Thomas Aquinas later systematized the doctrine, and Dante embedded the order in Western popular imagination.',
+  },
+  {
+    q: 'Why is pride first and lust last?',
+    a: 'The ranking reflects what each habit does to a person over time. Pride is the root: an inflated self-regard feeds envy, justifies wrath, and resists correction, which is why Gregory called it the queen of vices. Lust ranks last not because it is harmless but because its disorder aims at connection, however misdirected, while the sins above it aim at superiority, resentment, or hoarding.',
+  },
+  {
+    q: 'Is there a biblical list of the seven deadly sins in order?',
+    a: 'No. No biblical passage presents these seven as a numbered list. The individual behaviors are discussed throughout Scripture, but the seven-item formulation is the product of early monastic psychology and medieval theology — Evagrius’s eight thoughts refined into Gregory’s seven — not a single verse or chapter.',
+  },
+];
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  author: { '@type': 'Person', name: SITE.author.name },
+  publisher: { '@type': 'Organization', name: SITE.name, url: SITE.url + '/' },
+  datePublished: '2026-11-23',
+  dateModified: '2026-11-23',
+  mainEntityOfPage: new URL('/seven-deadly-sins-list/', SITE.url).href,
+};
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.q,
+    acceptedAnswer: { '@type': 'Answer', text: faq.a },
+  })),
+};
+
+const itemListLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'The Seven Deadly Sins in Traditional Order',
+  itemListElement: traditionalOrder.map((sin, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: sin.name,
+    url: new URL(`/seven-deadly-sins/${sin.slug}/`, SITE.url).href,
+  })),
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  path="/seven-deadly-sins-list/"
+  type="article"
+  publishedTime="2026-11-23"
+  jsonLd={[articleLd, faqLd, itemListLd]}
+>
+  <Breadcrumbs
+    items={[
+      { name: 'Home', path: '/' },
+      { name: 'Seven Deadly Sins List', path: '/seven-deadly-sins-list/' },
+    ]}
+  />
+
+  <article class="prose-article mt-4">
+    <h1>The Seven Deadly Sins List: All 7 in Order</h1>
+    <p>
+      Here is the complete seven deadly sins list, in the traditional order of severity &mdash;
+      from most serious to least. Each entry gives the Latin name, a one-line definition, and a
+      link to the full guide on that sin, where you will find its origin, modern examples, the
+      opposing virtue, and common misconceptions.
+    </p>
+
+    <h2>The Seven Deadly Sins in Order: Quick List</h2>
+    <ol>
+      {
+        traditionalOrder.map((sin) => (
+          <li>
+            <strong>
+              <a href={`/seven-deadly-sins/${sin.slug}/`}>{sin.name}</a>
+            </strong>{' '}
+            (<em>{sin.latin}</em>) &mdash; {sin.oneLiner}
+          </li>
+        ))
+      }
+    </ol>
+
+    <h2>The Seven Deadly Sins List with Latin Names and Definitions</h2>
+    <table>
+      <caption class="text-left mb-2 text-[var(--color-muted)]">
+        Table 1: the seven deadly sins in traditional order, with Latin names, contrary virtues,
+        and one-line definitions.
+      </caption>
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Sin</th>
+          <th scope="col">Latin</th>
+          <th scope="col">Contrary virtue</th>
+          <th scope="col">One-line definition</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          traditionalOrder.map((sin, index) => (
+            <tr>
+              <td>{index + 1}</td>
+              <th scope="row">
+                <a href={`/seven-deadly-sins/${sin.slug}/`}>{sin.name}</a>
+              </th>
+              <td>
+                <em>{sin.latin}</em>
+              </td>
+              <td>{sin.virtue}</td>
+              <td>{sin.oneLiner}</td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+
+    <h2>Why This Order? The History Behind It</h2>
+    <p>
+      The order above is Dante&rsquo;s: in the <em>Divine Comedy</em>, the mountain of Purgatory has
+      seven terraces, and the heaviest sins sit lowest. Pride anchors the base because medieval
+      theology treated it as the root of the others &mdash; the inflated self-regard from which
+      envy, wrath, and the rest become psychologically plausible. As the soul climbs, the sins grow
+      lighter, ending with lust at the summit&rsquo;s edge.
+    </p>
+    <p>
+      The ordering was not arbitrary even before Dante. The list&rsquo;s ancestor is Evagrius
+      Ponticus&rsquo;s eight <em>logismoi</em> (c. 375 CE), which he ranked from the cruder bodily
+      appetites to the most spiritual corruptions:
+    </p>
+    <ol>
+      {
+        evagriusOrder.map((item) => (
+          <li>{item}</li>
+        ))
+      }
+    </ol>
+    <p>
+      Pope Gregory I consolidated the eight into seven around 590 CE, folding vainglory into pride
+      and sadness into sloth and envy. Gregory&rsquo;s own enumeration ran from least to most
+      dangerous, ending with pride &mdash; which is why many medieval writers called pride the
+      <em>queen of vices</em> rather than simply one item on a list.
+    </p>
+
+    <h2>The Seven Sins in Dante&rsquo;s Order on Mount Purgatory</h2>
+    <ol>
+      {
+        danteOrder.map((item) => (
+          <li>{item}</li>
+        ))
+      }
+    </ol>
+    <p>
+      Reading the terraces bottom to top gives the most severe to least severe; reading them top to
+      bottom reverses it. Both directions appear in popular lists, which is why different sources
+      sometimes seem to disagree &mdash; they are usually walking the same mountain in opposite
+      directions.
+    </p>
+
+    <h2>Frequently Asked Questions</h2>
+    {
+      faqs.map((faq) => (
+        <section>
+          <h3>{faq.q}</h3>
+          <p>{faq.a}</p>
+        </section>
+      ))
+    }
+
+    <h2>Go Deeper on Each Sin</h2>
+    <p>
+      Every entry above links to a full guide with the sin&rsquo;s history, modern examples, and
+      remedy. Start from the <a href="/seven-deadly-sins/">seven deadly sins overview</a> for the
+      meaning and origins of the whole framework, compare each sin with its corrective habit on the{' '}
+      <a href="/seven-deadly-sins-and-virtues/">seven deadly sins and virtues</a> page, or read the
+      remedy side directly in the guide to the{' '}
+      <a href="/seven-heavenly-virtues/">seven heavenly virtues</a>. To see which of the seven
+      dimensions dominates your own habits, take the free{' '}
+      <a href="/">seven deadly sins test</a> &mdash; fifteen questions, instant percentage results,
+      nothing stored.
+    </p>
+  </article>
+</BaseLayout>

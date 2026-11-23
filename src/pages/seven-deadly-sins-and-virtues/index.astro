@@ -82,7 +82,9 @@ const articleLd = {
         {
           sins.map((sin) => (
             <tr>
-              <th scope="row">{sin.name}</th>
+              <th scope="row">
+                <a href={`/seven-deadly-sins/${sin.slug}/`}>{sin.name}</a>
+              </th>
               <td>{sin.latin}</td>
               <td>
                 <strong>{sin.virtue}</strong>
@@ -99,7 +101,7 @@ const articleLd = {
       sins.map((sin) => (
         <section id={sin.slug}>
           <h3>
-            {sin.name} vs. {sin.virtue}
+            <a href={`/seven-deadly-sins/${sin.slug}/`}>{sin.name}</a> vs. {sin.virtue}
           </h3>
           <p>
             <strong>The sin:</strong> {sin.summary}
@@ -123,10 +125,13 @@ const articleLd = {
     </p>
     <p>
       Return to the <a href="/seven-deadly-sins/">seven deadly sins overview</a> for origins,
-      definitions, modern examples, and misconceptions, or put the framework to work: take the
-      fifteen-question <a href="/">seven deadly sins test</a> to find your dominant sin, then take
-      the matching <a href="/seven-virtues-quiz/">seven heavenly virtues quiz</a> to see which
-      corrective virtue is already your strongest.
+      definitions, modern examples, and misconceptions, or browse the remedy side directly in the
+      guide to the <a href="/seven-heavenly-virtues/">seven heavenly virtues</a> and the{' '}
+      <a href="/seven-deadly-sins-list/">seven deadly sins list</a> in traditional order. To put
+      the framework to work: take the fifteen-question <a href="/">seven deadly sins test</a> to
+      find your dominant sin, then take the matching{' '}
+      <a href="/seven-virtues-quiz/">seven heavenly virtues quiz</a> to see which corrective virtue
+      is already your strongest.
     </p>
   </article>
 </BaseLayout>

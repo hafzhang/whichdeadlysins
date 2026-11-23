@@ -1,0 +1,253 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { VIRTUES } from '../../data/virtues';
+import sins from '../../data/sins.json';
+import { SITE } from '../../data/site';
+
+const title =
+  'The Seven Heavenly Virtues: Meanings, Latin Names & the Sins They Oppose';
+const description =
+  'A complete guide to the seven heavenly virtues: humility, kindness, patience, diligence, charity, temperance, and chastity, with Latin names, definitions, modern examples, and the deadly sin each one opposes.';
+
+const sinBySlug = Object.fromEntries(sins.map((sin) => [sin.slug, sin]));
+
+/** 每个美德的定义、现代例子（独立撰写，与测验结果文案不重复） */
+const virtueGuides: Record<
+  string,
+  { definition: string; modern: string; practice: string }
+> = {
+  humility: {
+    definition:
+      'Humility is the trained habit of seeing yourself accurately: real strengths counted, real limits admitted, real debts to other people acknowledged. It is not self-contempt; the humble person can be confidently good at things. What humility removes is the ranking obsession — the need to stand above others and have the standing confirmed.',
+    modern:
+      'Presenting a project and naming every contributor by name; changing your mind in a meeting and saying so plainly; asking a junior colleague to explain something you do not understand; letting a compliment land without fishing for a second one.',
+    practice:
+      'Say "I was wrong" out loud and quickly. Share credit in the room where the credit lands. Keep one honest friend close enough to correct you. These are small acts, and they are the whole training.',
+  },
+  kindness: {
+    definition:
+      'Kindness, in the classical pairing, is more than being nice: it is actively willing good for other people, including the ones whose success stings you. It is the direct counter to envy because it trains the exact muscles envy atrophies — the ability to celebrate another person’s good fortune without subtracting from your own.',
+    modern:
+      'Congratulating the colleague who got the promotion you wanted, in the moment you least want to; speaking well of a rival behind their back; feeling genuine pleasure at a friend’s engagement, body, or new house instead of running the comparison.',
+    practice:
+      'Make the generous remark within ten seconds of the sting. Bless what you envy on purpose. Kindness is repetition, and the repetition is the cure.',
+  },
+  patience: {
+    definition:
+      'Patience is the capacity to hold the space between a trigger and a response. It does not deny anger or accept injustice; it refuses to act while the anger is steering. The patient person still gets angry — they simply stay in possession of themselves long enough for proportion to catch up with the heat.',
+    modern:
+      'Leaving the furious message in drafts overnight; breathing through a delay instead of leaning on the horn; asking one clarifying question before responding to a perceived insult; responding to a provocation with a scheduled conversation instead of an explosion.',
+    practice:
+      'Institute a mandatory hold on anything written while angry. Name the emotion out loud before acting on it. Patience is a skill of gaps, and every gap you build makes the next one easier.',
+  },
+  diligence: {
+    definition:
+      'Diligence is steady, modest effort applied before motivation arrives. It is not workaholism and not frantic productivity; it is the habit of starting the things you already believe matter, at a scale small enough that starting is possible, and returning to them regularly.',
+    modern:
+      'Ten minutes on the important project before checking the phone; answering the small messages before they become an avalanche; week three of the practice you would normally have abandoned; scheduled, guilt-free rest that is actually chosen.',
+    practice:
+      'Commit to the smallest possible start — one paragraph, one email — and let continuation be optional. Schedule effort rather than waiting to feel like it. Diligence is the opposite of avoidance, not the opposite of rest.',
+  },
+  charity: {
+    definition:
+      'Charity means deliberate release: giving money, time, credit, and useful information away on purpose, before you feel you can spare it. It is the counter-evidence to greed’s core claim that enough will never exist. In the older vocabulary it is generosity of spirit, and it covers how you treat people who can never repay you.',
+    modern:
+      'Sharing the shortcut that cost you a week to find; giving public credit to the person whose work made yours possible; a fixed percentage of income set aside for giving before the spending starts; helping someone who has nothing to offer back.',
+    practice:
+      'Automate giving so it is a system, not a mood. Release the credit, the introduction, the information you would rather keep. Each unforced act of generosity loosens the hoarding instinct one repetition at a time.',
+  },
+  temperance: {
+    definition:
+      'Temperance is deliberate consumption rather than abstinence. It means deciding in advance how much is enough, noticing the difference between genuine need and comfort-seeking, and stopping while there is still a small margin of unsatisfied appetite. It applies equally to food, drink, streaming, and the reflexive reach for a phone.',
+    modern:
+      'Deciding the portion before the plate arrives; disabling autoplay so the next episode requires a decision; pouring one drink and making the second a conscious choice; eating a meal without a screen and noticing when fullness arrives.',
+    practice:
+      'Make consumption decisions before the temptation, not during it. Introduce stopping points — plates cleared, autoplay off. And identify what the consumption is medicating, because temperance removes the anesthetic without pretending there was no wound.',
+  },
+  chastity: {
+    definition:
+      'Chastity is the most misunderstood of the seven virtues: it means integrating desire with your commitments and respect for other people, not eliminating attraction. It asks whether a longing is being treated as a command. Honest boundaries, transparency, and a pause between feeling and acting are its practice, whatever your relationship status.',
+    modern:
+      'Deciding boundaries before intensity arrives rather than during it; being transparent with a partner instead of managing double books; feeling strong attraction and holding it inside the commitments you actually endorse; treating desire as information rather than command.',
+    practice:
+      'Build a pause between feeling and acting, long enough for your judgment to attend the meeting. Chastity is wholeness — intensity and values on the same side — not emptiness.',
+  },
+};
+
+const faqs = [
+  {
+    q: 'What are the seven heavenly virtues?',
+    a: 'The seven heavenly virtues are humility, kindness, patience, diligence, charity, temperance, and chastity. In the popular "contrary virtues" tradition, each one is the specific remedy for a matching deadly sin: humility opposes pride, kindness opposes envy, patience opposes wrath, diligence opposes sloth, charity opposes greed, temperance opposes gluttony, and chastity opposes lust.',
+  },
+  {
+    q: 'What are the Latin names of the seven heavenly virtues?',
+    a: 'Humility is humilitas, kindness is benignitas, patience is patientia, diligence is diligentia, charity is caritas, temperance is temperantia, and chastity is castitas. A separate, older tradition combines the four cardinal virtues (prudence, justice, fortitude, temperance) with the three theological ones (faith, hope, charity); this page covers the contrary-virtues list that pairs one-to-one with the seven deadly sins.',
+  },
+  {
+    q: 'Where did the seven heavenly virtues come from?',
+    a: 'The pairing of virtues against vices runs through ancient Greek philosophy and early Christian writing. Once Pope Gregory I fixed the list of seven deadly sins around 590 CE, theologians and poets systematized the matching remedies, and the contrary-virtues list became the standard teaching tool. Each virtue is defined as a trained habit — the opposite groove cut beside the vice.',
+  },
+  {
+    q: 'Is chastity the same as celibacy?',
+    a: 'No. In this framework chastity means integrating desire with your commitments and respect for other people, and it applies to every relationship status. Celibacy is a vocation of absence; chastity is a skill of integration — boundaries decided before intensity arrives, honesty instead of concealment, and desire treated as information rather than command.',
+  },
+  {
+    q: 'How do I practice a virtue if I am weak in it?',
+    a: 'The tradition treats virtue as a skill built by repetition, which matches modern habit research well. Identify the matching sin first — weakness in patience is usually strength in wrath — then train the specific, repeatable behavior: a mandatory delay before heated replies, a fixed percentage for giving, the smallest possible start on avoided work. Measurable change usually shows up before it feels real; retaking a structured assessment after a few weeks makes the shift visible.',
+  },
+  {
+    q: 'Can virtues be measured?',
+    a: 'Not clinically, but they can be assessed as structured self-reflection. The seven heavenly virtues quiz on this site asks fifteen positively worded statements — agreement means the virtue is strong — and returns a percentage for each virtue using the same transparent scoring as the sins quiz. It is an educational tool built on the historical framework, not a validated psychological instrument.',
+  },
+];
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  author: { '@type': 'Person', name: SITE.author.name },
+  publisher: { '@type': 'Organization', name: SITE.name, url: SITE.url + '/' },
+  datePublished: '2026-11-23',
+  dateModified: '2026-11-23',
+  mainEntityOfPage: new URL('/seven-heavenly-virtues/', SITE.url).href,
+};
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.q,
+    acceptedAnswer: { '@type': 'Answer', text: faq.a },
+  })),
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  path="/seven-heavenly-virtues/"
+  type="article"
+  publishedTime="2026-11-23"
+  jsonLd={[articleLd, faqLd]}
+>
+  <Breadcrumbs
+    items={[
+      { name: 'Home', path: '/' },
+      { name: 'Seven Heavenly Virtues', path: '/seven-heavenly-virtues/' },
+    ]}
+  />
+
+  <article class="prose-article mt-4">
+    <h1>The Seven Heavenly Virtues Explained</h1>
+    <p>
+      For every deadly sin, the medieval moral tradition named a <strong>contrary virtue</strong>
+      &mdash; a trained habit that pulls character in the opposite direction. The seven heavenly
+      virtues are the remedy side of the framework: where a sin is a groove worn into behavior by
+      repetition, the matching virtue is a new groove cut deliberately beside it. This guide covers
+      each virtue&rsquo;s meaning and Latin name, what it looks like in modern life, and how to
+      practice it against the sin it opposes.
+    </p>
+
+    <h2>The Seven Heavenly Virtues and the Sins They Oppose: Table</h2>
+    <table>
+      <caption class="text-left mb-2 text-[var(--color-muted)]">
+        Table 1: each heavenly virtue with its Latin name, the deadly sin it opposes, and a
+        one-line definition.
+      </caption>
+      <thead>
+        <tr>
+          <th scope="col">Virtue</th>
+          <th scope="col">Latin</th>
+          <th scope="col">Opposes</th>
+          <th scope="col">Definition</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          VIRTUES.map((virtue) => (
+            <tr>
+              <th scope="row">
+                <a href={`/seven-heavenly-virtues/#${virtue.pairedSin}`}>{virtue.name}</a>
+              </th>
+              <td>
+                <em>{virtue.latin}</em>
+              </td>
+              <td>
+                <a href={`/seven-deadly-sins/${virtue.pairedSin}/`}>{sinBySlug[virtue.pairedSin].name}</a>
+              </td>
+              <td>{virtue.summary}</td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+
+    <h2>The Seven Virtues Explained One by One</h2>
+    <p>
+      Each section below defines the virtue, shows what it looks like in modern life, and gives the
+      core practice. The pairing is one-to-one: every virtue exists as the countertraining for a
+      specific sin, so the fastest way to find your practice is to find your dominant sin first.
+    </p>
+    {
+      VIRTUES.map((virtue) => {
+        const guide = virtueGuides[virtue.slug];
+        const sin = sinBySlug[virtue.pairedSin];
+        return (
+          <section id={virtue.pairedSin}>
+            <h3>
+              {virtue.name} (<em>{virtue.latin}</em>) &mdash; the remedy for {sin.name.toLowerCase()} (
+              <em>{sin.latin}</em>)
+            </h3>
+            <p>{guide.definition}</p>
+            <p>
+              <strong>What it looks like today:</strong> {guide.modern}
+            </p>
+            <p>
+              <strong>The practice:</strong> {guide.practice}
+            </p>
+            <p>
+              <a href={`/seven-deadly-sins/${sin.slug}/`}>
+                Read the full guide on {sin.name.toLowerCase()}, the sin {virtue.name.toLowerCase()} opposes
+                &rarr;
+              </a>
+            </p>
+          </section>
+        );
+      })
+    }
+
+    <h2>How to Use the Virtues in Practice</h2>
+    <p>
+      The useful way into this framework is diagnostic, not devotional. Find your dominant
+      dimension &mdash; the free <a href="/">seven deadly sins test</a> scores all seven in about
+      five minutes &mdash; and train its contrary virtue deliberately for a few weeks with one
+      specific, repeatable action. Because virtues are skills, measurable change usually arrives
+      before it feels real. Then retake the quiz: the percentage movement is the tradition&rsquo;s
+      own feedback loop, modernized. The full side-by-side reasoning for every pair lives on the{' '}
+      <a href="/seven-deadly-sins-and-virtues/">seven deadly sins and virtues</a> page.
+    </p>
+
+    <h2>Frequently Asked Questions</h2>
+    {
+      faqs.map((faq) => (
+        <section>
+          <h3>{faq.q}</h3>
+          <p>{faq.a}</p>
+        </section>
+      ))
+    }
+
+    <h2>Continue Exploring</h2>
+    <p>
+      Measure the corrective side directly with the{' '}
+      <a href="/seven-virtues-quiz/">seven heavenly virtues quiz</a>, or study the sin side of each
+      pairing: the <a href="/seven-deadly-sins-list/">seven deadly sins list</a> shows all seven in
+      traditional order with links to a full guide on every sin, and the{' '}
+      <a href="/seven-deadly-sins/">seven deadly sins overview</a> covers the history and meaning of
+      the whole framework.
+    </p>
+  </article>
+</BaseLayout>

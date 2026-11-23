@@ -16,6 +16,8 @@ export const NAV_LINKS = [
   { name: 'Sins Quiz', path: '/' },
   { name: 'Virtues Quiz', path: '/seven-virtues-quiz/' },
   { name: 'Seven Deadly Sins', path: '/seven-deadly-sins/' },
+  { name: 'Sins List', path: '/seven-deadly-sins-list/' },
+  { name: 'Seven Virtues', path: '/seven-heavenly-virtues/' },
   { name: 'Sins & Virtues', path: '/seven-deadly-sins-and-virtues/' },
   { name: 'About', path: '/about/' },
 ] as const;

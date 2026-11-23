@@ -1,0 +1,119 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { SIN_PAGES } from '../../data/sin-pages';
+import { SITE } from '../../data/site';
+
+export function getStaticPaths() {
+  return SIN_PAGES.map((page) => ({
+    params: { slug: page.slug },
+    props: { page },
+  }));
+}
+
+const { page } = Astro.props;
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: page.title,
+  description: page.description,
+  author: { '@type': 'Person', name: SITE.author.name },
+  publisher: { '@type': 'Organization', name: SITE.name, url: SITE.url + '/' },
+  datePublished: '2026-11-23',
+  dateModified: '2026-11-23',
+  mainEntityOfPage: new URL(`/seven-deadly-sins/${page.slug}/`, SITE.url).href,
+};
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: page.faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.q,
+    acceptedAnswer: { '@type': 'Answer', text: faq.a },
+  })),
+};
+
+// 上一罪 / 下一罪（按传统顺序循环），提升子页之间与中枢页的互链密度
+const index = SIN_PAGES.findIndex((item) => item.slug === page.slug);
+const prev = SIN_PAGES[(index + SIN_PAGES.length - 1) % SIN_PAGES.length];
+const next = SIN_PAGES[(index + 1) % SIN_PAGES.length];
+---
+
+<BaseLayout
+  title={page.title}
+  description={page.description}
+  path={`/seven-deadly-sins/${page.slug}/`}
+  type="article"
+  publishedTime="2026-11-23"
+  jsonLd={[articleLd, faqLd]}
+>
+  <Breadcrumbs
+    items={[
+      { name: 'Home', path: '/' },
+      { name: 'Seven Deadly Sins', path: '/seven-deadly-sins/' },
+      { name: page.name, path: `/seven-deadly-sins/${page.slug}/` },
+    ]}
+  />
+
+  <article class="prose-article mt-4">
+    <h1>{page.name} (<em>{page.latin}</em>): The Seven Deadly Sins Explained</h1>
+
+    <h2>What Is the Sin of {page.name}?</h2>
+    {page.definition.map((paragraph) => <p>{paragraph}</p>)}
+
+    <h2>The Latin Name and Where It Comes From</h2>
+    {page.origin.map((paragraph) => <p>{paragraph}</p>)}
+
+    <h2>{page.name} in Modern Life: Examples</h2>
+    <p>{page.modern.intro}</p>
+    <ul>
+      {
+        page.modern.examples.map((example) => (
+          <li>{example}</li>
+        ))
+      }
+    </ul>
+
+    <h2>The Opposing Virtue: {page.virtue}</h2>
+    {page.opposing.map((paragraph) => <p>{paragraph}</p>)}
+
+    <h2>Common Misconceptions About {page.name}</h2>
+    {
+      page.misconceptions.map((item) => (
+        <section>
+          <h3>{item.heading}</h3>
+          <p>{item.text}</p>
+        </section>
+      ))
+    }
+
+    <h2>Frequently Asked Questions About the Sin of {page.name}</h2>
+    {
+      page.faqs.map((faq) => (
+        <section>
+          <h3>{faq.q}</h3>
+          <p>{faq.a}</p>
+        </section>
+      ))
+    }
+
+    <h2>Keep Reading About the Seven Deadly Sins</h2>
+    <p>
+      This guide on {page.name.toLowerCase()} is one of seven. Continue with the{' '}
+      <a href={`/seven-deadly-sins/${prev.slug}/`}>guide to {prev.name.toLowerCase()} ({prev.latin})</a>{' '}
+      or the <a href={`/seven-deadly-sins/${next.slug}/`}>guide to {next.name.toLowerCase()} ({next.latin})</a>,
+      or return to the <a href="/seven-deadly-sins/">seven deadly sins</a> overview for the history
+      of the whole list. The <a href="/seven-deadly-sins-list/">seven deadly sins list</a> shows all
+      seven in traditional order, and the{' '}
+      <a href="/seven-deadly-sins-and-virtues/">sins and virtues</a> page pairs each sin with its
+      contrary virtue — {page.name.toLowerCase()} is opposed by {page.virtue.toLowerCase()}.
+    </p>
+    <p>
+      Curious where {page.name.toLowerCase()} shows up in your own habits? The free{' '}
+      <a href="/">seven deadly sins test</a> scores all seven dimensions in about five minutes, and
+      if {page.name.toLowerCase()} is your strongest, your result links straight back to this guide.
+    </p>
+  </article>
+</BaseLayout>

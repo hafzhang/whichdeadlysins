@@ -44,7 +44,7 @@ const articleLd = {
   author: { '@type': 'Person', name: SITE.author.name },
   publisher: { '@type': 'Organization', name: SITE.name, url: SITE.url + '/' },
   datePublished: '2026-11-19',
-  dateModified: '2026-11-19',
+  dateModified: '2026-11-23',
   mainEntityOfPage: new URL('/seven-deadly-sins/', SITE.url).href,
 };
 
@@ -143,7 +143,7 @@ const faqLd = {
           sins.map((sin) => (
             <tr>
               <th scope="row">
-                <a href={`#${sin.slug}`}>{sin.name}</a>
+                <a href={`/seven-deadly-sins/${sin.slug}/`}>{sin.name}</a>
               </th>
               <td>{sin.latin}</td>
               <td>{sin.virtue}</td>
@@ -155,18 +155,22 @@ const faqLd = {
     </table>
 
     <h2>The Seven Sins Explained One by One</h2>
+    <p>
+      Each summary below gives the definition in brief. For the Latin origin, detailed modern
+      examples, the opposing virtue, and common misconceptions, follow the link into that
+      sin&rsquo;s full guide.
+    </p>
     {
       sins.map((sin) => (
         <section id={sin.slug}>
           <h3>
             {sin.name} (<em>{sin.latin}</em>) &mdash; opposed by {sin.virtue}
           </h3>
-          <p>{sin.description}</p>
+          <p>{sin.summary}</p>
           <p>
-            <strong>Modern example:</strong> {sin.modernExample}
-          </p>
-          <p>
-            <strong>Common misconception:</strong> {sin.misconception}
+            <a href={`/seven-deadly-sins/${sin.slug}/`}>
+              Read the full guide on {sin.name.toLowerCase()} &rarr;
+            </a>
           </p>
         </section>
       ))
@@ -218,7 +222,9 @@ const faqLd = {
       produce a percentage profile across all seven dimensions, with scoring that runs entirely in
       your browser and stores nothing. If you want the remedy side of the framework first, continue
       to the <a href="/seven-deadly-sins-and-virtues/">seven deadly sins and virtues</a> comparison
-      page.
+      page, or browse the full <a href="/seven-deadly-sins-list/">seven deadly sins list</a> in
+      traditional order and the complete guide to the{' '}
+      <a href="/seven-heavenly-virtues/">seven heavenly virtues</a>.
     </p>
   </article>
 </BaseLayout>

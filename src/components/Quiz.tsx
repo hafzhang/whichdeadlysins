@@ -177,7 +177,7 @@ export default function Quiz({
               href={result.dominant.href}
               class="rounded-full px-6 py-3 font-semibold underline"
             >
-              Read more about {result.dominant.name}
+              Read the full guide on {result.dominant.name}
             </a>
           )}
         </div>
